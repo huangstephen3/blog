@@ -10,13 +10,13 @@ const year = new Date().getFullYear();
 		<div>
 			<p class="site-name">{SITE_TITLE}</p>
 			<p class="site-copy">
-				&copy; {year} {SITE_AUTHOR}。本站基于 Astro 构建，通过 GitHub Pages 自动发布，并接入 Supabase 无密码登录。
+				&copy; {year} {SITE_AUTHOR}。一个独立运营的 AI 科技新闻站，专注模型、产品、创业与产业信号。
 			</p>
 		</div>
 		<div class="footer-links">
-			<a href={withBase('blog/')}>免费资源</a>
-			<a href={withBase('vip/')}>会员专区</a>
-			<a href={withBase('login/')}>登录入口</a>
+			<a href={withBase('blog/')}>AI快讯</a>
+			<a href={withBase('vip/')}>订阅计划</a>
+			<a href={withBase('login/')}>读者登录</a>
 			<a href={withBase('rss.xml')}>RSS</a>
 		</div>
 	</div>

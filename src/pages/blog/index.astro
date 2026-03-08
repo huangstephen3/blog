@@ -15,7 +15,7 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
 <!doctype html>
 <html lang={SITE_LANG}>
 	<head>
-		<BaseHead title={`免费资源 | ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
+		<BaseHead title={`AI快讯 | ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
 		<style>
 			.archive-grid {
 				display: grid;
@@ -85,9 +85,9 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
 		<Header />
 		<main>
 			<div class="page-title">
-				<p class="eyebrow">Free Resources</p>
-				<h1>免费资源归档</h1>
-				<p>这里是偏资源站风格的文章列表页，适合按主题持续更新内容。</p>
+				<p class="eyebrow">AI Brief Archive</p>
+				<h1>AI 快讯归档</h1>
+				<p>这里按照时间顺序归档所有 AI 新闻、模型动向、产品观察和订阅预告。</p>
 			</div>
 
 			<section class="archive-grid">
@@ -98,7 +98,7 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
 							<div class="meta">
 								<span>{post.data.category}</span>
 								<span><FormattedDate date={post.data.pubDate} /></span>
-								{post.data.premium && <span>会员预告</span>}
+								{post.data.premium && <span>订阅预告</span>}
 							</div>
 							<h2>{post.data.title}</h2>
 							<p>{post.data.description}</p>

@@ -14,6 +14,7 @@ const featured = posts.find((post) => post.data.featured) ?? posts[0];
 const latest = posts.slice(0, 6);
 const categories = Array.from(new Set(posts.map((post) => post.data.category)));
 const hotTags = Array.from(new Set(posts.flatMap((post) => post.data.tags))).slice(0, 8);
+const premiumCount = posts.filter((post) => post.data.premium).length;
 ---
 
 <!doctype html>
@@ -30,15 +31,17 @@ const hotTags = Array.from(new Set(posts.flatMap((post) => post.data.tags))).sli
 			.hero-card,
 			.feed-card,
 			.side-card,
-			.feature-card {
+			.feature-card,
+			.stat-card {
 				background: rgb(var(--panel));
 				border: 1px solid rgba(var(--line), 1);
-				border-radius: 20px;
+				border-radius: 24px;
 			}
 
 			.hero-card {
-				padding: 1.4rem;
+				padding: 1.6rem;
 				margin-bottom: 1rem;
+				box-shadow: 0 20px 50px rgba(var(--accent), 0.08);
 			}
 
 			.hero-grid {
@@ -49,7 +52,7 @@ const hotTags = Array.from(new Set(posts.flatMap((post) => post.data.tags))).sli
 
 			.hero-card h1 {
 				margin: 0.5rem 0 0.8rem;
-				font-size: clamp(2.2rem, 5vw, 4rem);
+				font-size: clamp(2.5rem, 5.5vw, 4.6rem);
 				line-height: 1.06;
 			}
 
@@ -64,8 +67,35 @@ const hotTags = Array.from(new Set(posts.flatMap((post) => post.data.tags))).sli
 				margin-top: 1.4rem;
 			}
 
+			.stat-grid {
+				display: grid;
+				grid-template-columns: repeat(3, minmax(0, 1fr));
+				gap: 0.8rem;
+				margin-top: 1.4rem;
+			}
+
+			.stat-card {
+				padding: 0.95rem 1rem;
+				background: rgba(var(--panel-strong), 0.85);
+			}
+
+			.stat-label {
+				margin: 0 0 0.25rem;
+				color: rgb(var(--muted));
+				font-size: 0.82rem;
+				text-transform: uppercase;
+				letter-spacing: 0.08em;
+			}
+
+			.stat-value {
+				margin: 0;
+				font-family: Georgia, "Times New Roman", "Songti SC", serif;
+				font-size: 1.8rem;
+			}
+
 			.feature-card {
 				overflow: hidden;
+				position: relative;
 			}
 
 			.feature-card img {
@@ -74,6 +104,23 @@ const hotTags = Array.from(new Set(posts.flatMap((post) => post.data.tags))).sli
 				height: 100%;
 				object-fit: cover;
 				min-height: 280px;
+				filter: saturate(0.92) contrast(1.05);
+			}
+
+			.feature-caption {
+				position: absolute;
+				left: 1rem;
+				right: 1rem;
+				bottom: 1rem;
+				padding: 0.9rem 1rem;
+				border-radius: 18px;
+				background: rgba(15, 19, 23, 0.68);
+				color: white;
+			}
+
+			.feature-caption p {
+				margin: 0;
+				color: rgba(255, 255, 255, 0.8);
 			}
 
 			.section-head {
@@ -85,7 +132,7 @@ const hotTags = Array.from(new Set(posts.flatMap((post) => post.data.tags))).sli
 			}
 
 			.feed-card {
-				padding: 1rem;
+				padding: 1.15rem;
 			}
 
 			.search-box {
@@ -112,7 +159,7 @@ const hotTags = Array.from(new Set(posts.flatMap((post) => post.data.tags))).sli
 				height: 100%;
 				padding: 0.9rem;
 				border-radius: 16px;
-				background: rgb(var(--panel-strong));
+				background: linear-gradient(180deg, rgba(var(--panel-strong), 0.9), rgba(var(--panel), 1));
 				border: 1px solid rgba(var(--line), 1);
 				text-decoration: none;
 			}
@@ -167,7 +214,8 @@ const hotTags = Array.from(new Set(posts.flatMap((post) => post.data.tags))).sli
 			}
 
 			.side-card {
-				padding: 1rem;
+				padding: 1.1rem;
+				background: rgba(var(--panel), 0.94);
 			}
 
 			.side-card ul {
@@ -201,7 +249,8 @@ const hotTags = Array.from(new Set(posts.flatMap((post) => post.data.tags))).sli
 			@media (max-width: 980px) {
 				.home-shell,
 				.hero-grid,
-				.post-list {
+				.post-list,
+				.stat-grid {
 					grid-template-columns: 1fr;
 				}
 			}
@@ -213,20 +262,40 @@ const hotTags = Array.from(new Set(posts.flatMap((post) => post.data.tags))).sli
 			<div class="home-shell">
 				<div>
 					<section class="hero-card">
-						<p class="eyebrow">Free First Blog</p>
+						<p class="eyebrow">Independent AI Desk</p>
 						<div class="hero-grid">
 							<div>
 								<h1>{SITE_TITLE}</h1>
 								<p>{SITE_DESCRIPTION}</p>
 								<p>{SITE_TAGLINE}</p>
 								<div class="hero-actions">
-									<a class="button" href={withBase('blog/')}>浏览资源</a>
-									<a class="button button-soft" href={withBase('vip/')}>查看会员页</a>
-									<a class="button button-soft" href={withBase('login/')}>登录测试</a>
+									<a class="button" href={withBase('blog/')}>进入今日快讯</a>
+									<a class="button button-soft" href={withBase('vip/')}>查看订阅计划</a>
+									<a class="button button-soft" href={withBase('login/')}>读者登录</a>
+								</div>
+								<div class="stat-grid">
+									<div class="stat-card">
+										<p class="stat-label">Published</p>
+										<p class="stat-value">{posts.length}</p>
+									</div>
+									<div class="stat-card">
+										<p class="stat-label">Tracks</p>
+										<p class="stat-value">{categories.length}</p>
+									</div>
+									<div class="stat-card">
+										<p class="stat-label">Premium</p>
+										<p class="stat-value">{premiumCount}</p>
+									</div>
 								</div>
 							</div>
 							<a class="feature-card" href={featured ? withBase(`blog/${featured.id}/`) : withBase('blog/')}>
 								{featured?.data.heroImage && <img src={featured.data.heroImage.src} alt={featured.data.title} />}
+								{featured && (
+									<div class="feature-caption">
+										<strong>{featured.data.title}</strong>
+										<p>{featured.data.description}</p>
+									</div>
+								)}
 							</a>
 						</div>
 					</section>
@@ -234,14 +303,14 @@ const hotTags = Array.from(new Set(posts.flatMap((post) => post.data.tags))).sli
 					<section class="feed-card">
 						<div class="section-head">
 							<div>
-								<p class="eyebrow">Latest Posts</p>
-								<h2>最新文章</h2>
+								<p class="eyebrow">Daily Signal Feed</p>
+								<h2>今日情报流</h2>
 							</div>
-							<a href={withBase('blog/')}>查看全部</a>
+							<a href={withBase('blog/')}>查看全部快讯</a>
 						</div>
 
 						<div class="search-box">
-							<input id="post-search" type="search" placeholder="搜索文章标题、分类或标签" />
+							<input id="post-search" type="search" placeholder="搜索模型、公司、产品或栏目" />
 						</div>
 
 						<div class="post-list" id="post-list">
@@ -256,7 +325,7 @@ const hotTags = Array.from(new Set(posts.flatMap((post) => post.data.tags))).sli
 										<div class="meta-row">
 											<span>{post.data.category}</span>
 											<span><FormattedDate date={post.data.pubDate} /></span>
-											{post.data.premium && <span>会员预告</span>}
+											{post.data.premium && <span>订阅预告</span>}
 										</div>
 										<h3>{post.data.title}</h3>
 										<p>{post.data.description}</p>
@@ -272,41 +341,41 @@ const hotTags = Array.from(new Set(posts.flatMap((post) => post.data.tags))).sli
 
 				<aside class="side-column">
 					<section class="side-card">
-						<p class="eyebrow">登录入口</p>
-						<h3>外网可访问的会员入口</h3>
-						<p>这里已经预留了登录页和会员中心。当前使用 Supabase Magic Link，不要求用户输入密码。</p>
+						<p class="eyebrow">Readers Club</p>
+						<h3>把网站变成你的 AI 读者俱乐部</h3>
+						<p>登录后可以进入读者中心。后续这里可以继续长成每日邮件、专栏、资料库和专题订阅。</p>
 						<div class="hero-actions">
-							<a class="button" href={withBase('login/')}>立即登录</a>
+							<a class="button" href={withBase('login/')}>进入读者入口</a>
 						</div>
 					</section>
 
 					<section class="side-card">
-						<p class="eyebrow">Site Shape</p>
-						<h3>这套版型的重点</h3>
+						<p class="eyebrow">Editorial Spine</p>
+						<h3>编辑主轴</h3>
 						<ul>
 							{HOME_FEATURES.map((item) => <li><strong>{item.title}</strong>：{item.description}</li>)}
 						</ul>
 					</section>
 
 					<section class="side-card">
-						<p class="eyebrow">会员能力</p>
-						<h3>后续可继续扩展</h3>
+						<p class="eyebrow">Subscription</p>
+						<h3>订阅读者会得到什么</h3>
 						<ul>
 							{MEMBER_BENEFITS.map((item) => <li>{item}</li>)}
 						</ul>
 					</section>
 
 					<section class="side-card">
-						<p class="eyebrow">分类</p>
-						<h3>栏目导航</h3>
+						<p class="eyebrow">Coverage</p>
+						<h3>追踪栏目</h3>
 						<div class="category-list">
 							{categories.map((category) => <span class="category-pill">{category}</span>)}
 						</div>
 					</section>
 
 					<section class="side-card">
-						<p class="eyebrow">热门标签</p>
-						<h3>Tag Cloud</h3>
+						<p class="eyebrow">Signal Tags</p>
+						<h3>高频主题</h3>
 						<div class="tag-cloud">
 							{hotTags.map((tag) => <a href={withBase('blog/')}>#{tag}</a>)}
 						</div>

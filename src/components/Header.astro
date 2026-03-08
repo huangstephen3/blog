@@ -7,7 +7,7 @@ import { withBase } from '../utils/paths';
 <header class="site-header">
 	<div class="inner">
 		<div class="brand">
-			<p class="mini">资源网风格</p>
+			<p class="mini">Daily AI Newsroom</p>
 			<a class="brand-link" href={withBase()}>{SITE_TITLE}</a>
 		</div>
 
@@ -20,7 +20,7 @@ import { withBase } from '../utils/paths';
 		</nav>
 
 		<div class="auth-actions">
-			<a class="member-link" href={withBase('member/')}>会员中心</a>
+			<a class="member-link" href={withBase('member/')}>读者中心</a>
 			<a class="login-link" id="auth-link" href={withBase('login/')}>登录</a>
 		</div>
 	</div>
@@ -47,7 +47,7 @@ import { withBase } from '../utils/paths';
 		top: 0;
 		z-index: 20;
 		backdrop-filter: blur(14px);
-		background: rgba(255, 255, 255, 0.92);
+		background: rgba(245, 248, 246, 0.78);
 		border-bottom: 1px solid rgba(var(--line), 1);
 	}
 
@@ -63,16 +63,17 @@ import { withBase } from '../utils/paths';
 
 	.brand-link {
 		color: rgb(var(--ink));
-		font-size: 1.15rem;
+		font-size: 1.2rem;
 		font-weight: 800;
 		text-decoration: none;
+		font-family: Georgia, "Times New Roman", "Songti SC", serif;
 	}
 
 	.mini {
 		margin: 0 0 0.2rem;
-		color: rgb(var(--accent));
-		font-size: 0.74rem;
-		letter-spacing: 0.14em;
+		color: rgb(var(--signal));
+		font-size: 0.72rem;
+		letter-spacing: 0.18em;
 		text-transform: uppercase;
 	}
 
@@ -92,8 +93,8 @@ import { withBase } from '../utils/paths';
 
 	.nav-links :global(a.active),
 	.nav-links :global(a:hover) {
-		color: rgb(var(--accent));
-		background: rgba(var(--accent), 0.08);
+		color: rgb(var(--paper));
+		background: rgb(var(--accent));
 	}
 
 	.auth-actions {
@@ -112,7 +113,7 @@ import { withBase } from '../utils/paths';
 
 	.member-link {
 		color: rgb(var(--ink));
-		background: rgba(var(--panel-strong), 1);
+		background: rgba(var(--paper), 0.72);
 		border: 1px solid rgba(var(--line), 1);
 	}
 

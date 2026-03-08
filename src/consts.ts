@@ -1,40 +1,40 @@
-export const SITE_TITLE = 'Freedidi 风格资源博客';
-export const SITE_DESCRIPTION = '一个尽可能免费、外网可访问、支持无密码登录的个人资源博客。';
-export const SITE_TAGLINE = '资源整理、经验文章、会员入口和自动部署，一次搭好。';
+export const SITE_TITLE = 'Stephen AI Dispatch';
+export const SITE_DESCRIPTION = '一个面向中文读者的 AI 科技新闻站，追踪模型发布、产品动作、公司动态与真实落地信号。';
+export const SITE_TAGLINE = '每天筛选最值得看的 AI 新闻，把噪音压缩成可读、可转发、可行动的情报。';
 export const SITE_AUTHOR = 'Stephen';
 export const SITE_LANG = 'zh-CN';
 
 export const NAV_LINKS = [
 	{ href: '/', label: '首页' },
-	{ href: '/blog/', label: '免费资源' },
-	{ href: '/vip/', label: '会员专区' },
-	{ href: '/about/', label: '关于本站' },
+	{ href: '/blog/', label: 'AI快讯' },
+	{ href: '/vip/', label: '订阅计划' },
+	{ href: '/about/', label: '编辑室' },
 ];
 
 export const HOME_FEATURES = [
 	{
-		title: '资源站形态',
-		description: '首页是双栏布局，文章卡片、分类、标签和侧边栏都偏向资源站的阅读方式。',
+		title: '每日快讯',
+		description: '把每天的 AI 发布、融资、模型更新和平台动作整理成高密度新闻流。',
 	},
 	{
-		title: '无密码登录',
-		description: '通过 Supabase Magic Link 登录，不在 GitHub Pages 上直接收集密码。',
+		title: '编辑筛选',
+		description: '不追求机械搬运，而是筛选真正有价值的产品信号与产业影响。',
 	},
 	{
-		title: '自动发布',
-		description: '每次推送到 GitHub 的 main 分支后，站点会自动构建并发布到外网。',
+		title: '订阅读者',
+		description: '站点已经接好登录与订阅入口，后续可以扩展成会员简报与专属栏目。',
 	},
 ];
 
 export const MEMBER_BENEFITS = [
-	'查看会员导航页和专属推荐',
-	'为后续接入私密资源、收藏夹和下载记录留好位置',
-	'可以继续扩展成付费会员、投稿、评论和通知系统',
+	'每天收到一篇精编 AI 快讯或晨报',
+	'获取模型、工具、融资与政策信号的专题整理',
+	'为后续扩展成邮件订阅、会员专栏和资料库预留空间',
 ];
 
 export const STARTER_STEPS = [
-	'修改 `src/consts.ts` 里的站点标题和描述。',
-	'在 Supabase 创建项目并填入 `.env` 环境变量。',
-	'运行 `npm run dev` 本地预览站点。',
-	'推送到 GitHub，让 Actions 自动部署到外网。',
+	'把 Supabase 登录和 GitHub Pages 保持在线，确保编辑后台可用。',
+	'运行 `npm run new-post -- 文章标题` 创建新文章草稿。',
+	'把每日 AI 新闻整理成一篇 Markdown 发布到 `src/content/blog/`。',
+	'持续优化栏目、标签和订阅计划，让站点越来越像你的 AI 编辑品牌。',
 ];

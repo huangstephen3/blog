@@ -43,23 +43,23 @@ import { withBase } from '../utils/paths';
 		<Header />
 		<main>
 			<div class="page-title">
-				<p class="eyebrow">Member Center</p>
-				<h1>会员中心</h1>
-				<p>这个页面需要登录后访问。当前展示的是第一版会员中心骨架。</p>
+				<p class="eyebrow">Readers Room</p>
+				<h1>读者中心</h1>
+				<p>这是你的 AI 新闻站读者入口。后续可以继续扩展成专栏、收藏、专题和每日晨报订阅。</p>
 			</div>
 
 			<div id="member-loading" class="panel" data-login-redirect={withBase('login/')}>正在验证登录状态...</div>
 
 			<div id="member-app" class="member-grid hidden">
 				<section class="panel">
-					<p class="eyebrow">Session</p>
+					<p class="eyebrow">Reader Session</p>
 					<h2>欢迎回来</h2>
 					<p class="info">当前登录邮箱：<strong id="member-email">-</strong></p>
 					<p class="info">这里后续可以接：</p>
 					<ul>
-						<li>会员专属资源列表</li>
-						<li>下载记录和收藏夹</li>
-						<li>投稿入口和账号设置</li>
+						<li>今日 AI 晨报入口</li>
+						<li>专题收藏和阅读清单</li>
+						<li>会员专栏与账号设置</li>
 					</ul>
 					<p style="margin-top: 1rem;">
 						<button class="button" id="logout-button" type="button">退出登录</button>
@@ -68,11 +68,11 @@ import { withBase } from '../utils/paths';
 
 				<aside class="panel">
 					<p class="eyebrow">Next Phase</p>
-					<h2>后续最值得加的能力</h2>
+					<h2>下一阶段最值得做的事</h2>
 					<ul>
-						<li>登录后拉取私密资源数据</li>
-						<li>受控下载链接</li>
-						<li>按会员等级显示内容</li>
+						<li>按日期归档每日 AI Brief</li>
+						<li>给会员开放深度观察栏目</li>
+						<li>按订阅等级显示内容</li>
 					</ul>
 				</aside>
 			</div>

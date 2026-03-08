@@ -68,15 +68,15 @@ import { withBase } from '../utils/paths';
 		<Header />
 		<main>
 			<div class="page-title">
-				<p class="eyebrow">Passwordless Login</p>
-				<h1>登录 / 注册</h1>
-				<p>输入邮箱后，系统会发送 Magic Link 到你的邮箱。点击邮件中的链接即可登录。</p>
+				<p class="eyebrow">Readers Login</p>
+				<h1>读者登录</h1>
+				<p>输入邮箱后，系统会发送 Magic Link 到你的邮箱。点击邮件中的链接即可进入读者中心。</p>
 			</div>
 
 			<div class="auth-wrap">
 				<section class="panel" id="login-panel" data-member-redirect={withBase('member/')}>
-					<h2>邮箱登录</h2>
-					<p>这是最适合当前“免费 + 静态托管”方案的登录方式，不要求用户在页面输入密码。</p>
+					<h2>邮箱进入读者区</h2>
+					<p>这一版保持轻量，不要求你输入密码，方便读者快速进入 AI 晨报和会员入口。</p>
 					<form id="login-form">
 						<label>
 							邮箱地址
@@ -88,12 +88,12 @@ import { withBase } from '../utils/paths';
 				</section>
 
 				<aside class="panel">
-					<h2>接入前要做的配置</h2>
+					<h2>为什么先用这种登录方式</h2>
 					<ul class="help-list">
-						<li>在 Supabase 创建项目。</li>
-						<li>把 `PUBLIC_SUPABASE_URL` 和 `PUBLIC_SUPABASE_ANON_KEY` 写入环境变量。</li>
-						<li>在 Supabase Auth 设置中配置 `Site URL` 和允许的 `Redirect URLs`。</li>
-						<li>生产环境建议把登录完成后的跳转地址加入白名单。</li>
+						<li>读者进入门槛更低。</li>
+						<li>前期维护成本更轻。</li>
+						<li>适合独立新闻站快速启动订阅系统。</li>
+						<li>后续依然可以升级成更完整的会员权限。</li>
 					</ul>
 				</aside>
 			</div>

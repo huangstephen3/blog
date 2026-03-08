@@ -1,12 +1,13 @@
 :root {
-	--accent: 231, 87, 53;
-	--accent-deep: 206, 73, 40;
-	--ink: 29, 33, 42;
-	--muted: 105, 114, 130;
-	--paper: 246, 248, 252;
-	--panel: 255, 255, 255;
-	--panel-strong: 247, 249, 252;
-	--line: 225, 230, 238;
+	--accent: 14, 101, 87;
+	--accent-deep: 9, 70, 74;
+	--signal: 188, 116, 28;
+	--ink: 24, 31, 34;
+	--muted: 92, 105, 109;
+	--paper: 247, 244, 235;
+	--panel: 255, 252, 247;
+	--panel-strong: 241, 245, 242;
+	--line: 213, 220, 214;
 }
 
 * {
@@ -20,12 +21,14 @@ html {
 body {
 	margin: 0;
 	background:
-		radial-gradient(circle at top left, rgba(var(--accent), 0.08), transparent 28%),
-		linear-gradient(180deg, rgba(var(--paper), 1) 0%, rgba(241, 244, 249, 1) 100%);
+		linear-gradient(rgba(var(--line), 0.45) 1px, transparent 1px),
+		linear-gradient(90deg, rgba(var(--line), 0.45) 1px, transparent 1px),
+		radial-gradient(circle at top left, rgba(var(--accent), 0.09), transparent 30%),
+		radial-gradient(circle at top right, rgba(var(--signal), 0.08), transparent 26%),
+		linear-gradient(180deg, rgba(var(--paper), 1) 0%, rgba(239, 243, 239, 1) 100%);
+	background-size: 24px 24px, 24px 24px, auto, auto, auto;
 	color: rgb(var(--ink));
-	font-family:
-		"PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", system-ui,
-		sans-serif;
+	font-family: "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
 	line-height: 1.7;
 }
 
@@ -43,6 +46,7 @@ h5,
 h6 {
 	margin: 0 0 0.55rem;
 	line-height: 1.2;
+	font-family: Georgia, "Times New Roman", "Songti SC", serif;
 }
 
 a {
@@ -108,7 +112,7 @@ textarea {
 
 .eyebrow {
 	margin: 0 0 0.35rem;
-	color: rgb(var(--accent));
+	color: rgb(var(--signal));
 	font-size: 0.75rem;
 	font-weight: 700;
 	letter-spacing: 0.14em;
@@ -126,6 +130,7 @@ textarea {
 	color: rgb(var(--panel));
 	text-decoration: none;
 	cursor: pointer;
+	box-shadow: 0 10px 30px rgba(var(--accent), 0.16);
 }
 
 .button:hover {
@@ -134,7 +139,7 @@ textarea {
 }
 
 .button-soft {
-	background: rgb(var(--panel-strong));
+	background: rgba(var(--panel), 0.85);
 	color: rgb(var(--ink));
 	border: 1px solid rgba(var(--line), 1);
 }

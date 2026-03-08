@@ -12,7 +12,7 @@ const blog = defineCollection({
 			draft: z.boolean().default(false),
 			featured: z.boolean().default(false),
 			premium: z.boolean().default(false),
-			category: z.string().default('免费资源'),
+			category: z.string().default('AI快讯'),
 			tags: z.array(z.string()).default([]),
 			heroImage: image().optional(),
 		}),
