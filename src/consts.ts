@@ -13,6 +13,29 @@ export const NAV_LINKS = [
 	{ href: '/about/', label: 'About' },
 ];
 
+export const NEWS_SECTIONS = [
+	{
+		title: 'AI',
+		description: 'Models, labs, agents, chips, and platform launches.',
+	},
+	{
+		title: 'International Finance',
+		description: 'Macro moves, markets, trade, and cross-border capital.',
+	},
+	{
+		title: 'US Politics',
+		description: 'The White House, Congress, courts, and federal policy.',
+	},
+	{
+		title: 'China Finance & Politics',
+		description: 'Beijing policy, growth signals, trade, and regulation.',
+	},
+	{
+		title: 'Crypto',
+		description: 'Bitcoin, Ethereum, exchanges, regulation, and token markets.',
+	},
+];
+
 export const HOME_FEATURES = [
 	{
 		title: 'Daily Briefs',
@@ -37,6 +60,6 @@ export const MEMBER_BENEFITS = [
 export const STARTER_STEPS = [
 	'Keep GitHub Pages and Supabase online so publishing and reader access stay stable.',
 	'Run `npm run new-post -- "Story Title"` to create a new draft.',
-	'Publish one real AI news post per day to `src/content/blog/`.',
-	'Keep refining beats, tags, and membership so the site feels like a real editorial product.',
+	'Let the scheduled generator publish category briefs every morning and review the output when needed.',
+	'Keep refining beats, sources, and membership so the site feels like a real editorial product.',
 ];

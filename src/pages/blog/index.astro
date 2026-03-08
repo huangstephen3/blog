@@ -4,7 +4,7 @@ import BaseHead from '../../components/BaseHead.astro';
 import Footer from '../../components/Footer.astro';
 import FormattedDate from '../../components/FormattedDate.astro';
 import Header from '../../components/Header.astro';
-import { SITE_DESCRIPTION, SITE_LANG, SITE_TITLE } from '../../consts';
+import { NEWS_SECTIONS, SITE_DESCRIPTION, SITE_LANG, SITE_TITLE } from '../../consts';
 import { withBase } from '../../utils/paths';
 
 const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
@@ -66,7 +66,15 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
 				margin-top: 0.75rem;
 			}
 
+			.section-pills {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.55rem;
+				margin: 0 0 1rem;
+			}
+
 			.tag {
+				display: inline-flex;
 				padding: 0.22rem 0.62rem;
 				border-radius: 999px;
 				background: rgba(var(--accent), 0.08);
@@ -88,6 +96,10 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
 				<p class="eyebrow">AI Brief Archive</p>
 				<h1>AI Brief Archive</h1>
 				<p>Every published brief, sorted by time, covering model launches, infrastructure moves, platform strategy, and subscriber previews.</p>
+			</div>
+
+			<div class="section-pills">
+				{NEWS_SECTIONS.map((section) => <span class="tag">{section.title}</span>)}
 			</div>
 
 			<section class="archive-grid">

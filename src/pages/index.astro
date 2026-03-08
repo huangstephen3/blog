@@ -4,7 +4,7 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
-import { HOME_FEATURES, MEMBER_BENEFITS, SITE_DESCRIPTION, SITE_LANG, SITE_TAGLINE, SITE_TITLE } from '../consts';
+import { HOME_FEATURES, MEMBER_BENEFITS, NEWS_SECTIONS, SITE_DESCRIPTION, SITE_LANG, SITE_TAGLINE, SITE_TITLE } from '../consts';
 import { withBase } from '../utils/paths';
 
 const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
@@ -12,7 +12,7 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
 );
 const featured = posts.find((post) => post.data.featured) ?? posts[0];
 const latest = posts.slice(0, 6);
-const categories = Array.from(new Set(posts.map((post) => post.data.category)));
+const categories = NEWS_SECTIONS.map((section) => section.title);
 const hotTags = Array.from(new Set(posts.flatMap((post) => post.data.tags))).slice(0, 8);
 const premiumCount = posts.filter((post) => post.data.premium).length;
 ---
@@ -52,8 +52,8 @@ const premiumCount = posts.filter((post) => post.data.premium).length;
 
 			.hero-card h1 {
 				margin: 0.5rem 0 0.8rem;
-				font-size: clamp(2.5rem, 5.5vw, 4.6rem);
-				line-height: 1.06;
+				font-size: clamp(2.1rem, 4vw, 3.4rem);
+				line-height: 1.08;
 				max-width: 11ch;
 			}
 
@@ -91,8 +91,8 @@ const premiumCount = posts.filter((post) => post.data.premium).length;
 
 			.stat-value {
 				margin: 0;
-				font-family: Georgia, "Times New Roman", "Songti SC", serif;
-				font-size: 1.8rem;
+				font-family: "Sora", "Space Grotesk", "Avenir Next", sans-serif;
+				font-size: 1.6rem;
 			}
 
 			.feature-card {
@@ -375,7 +375,7 @@ const premiumCount = posts.filter((post) => post.data.premium).length;
 						<p class="eyebrow">Coverage</p>
 						<h3>Coverage map</h3>
 						<div class="category-list">
-							{categories.map((category) => <span class="category-pill">{category}</span>)}
+							{NEWS_SECTIONS.map((section) => <span class="category-pill" title={section.description}>{section.title}</span>)}
 						</div>
 					</section>
 

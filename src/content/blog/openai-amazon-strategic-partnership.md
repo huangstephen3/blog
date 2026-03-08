@@ -2,7 +2,7 @@
 title: OpenAI and Amazon turn the AI scale race into a cloud-and-capital story
 description: OpenAI's February 27, 2026 announcement tied together fresh funding, AWS distribution, custom silicon, and demand metrics that show how fast the market is moving.
 pubDate: 2026-02-27
-featured: true
+featured: false
 draft: false
 premium: false
 category: Platform Strategy
