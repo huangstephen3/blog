@@ -5,8 +5,8 @@ on:
     branches:
       - main
   schedule:
-    - cron: '0 12 * * *'
-    - cron: '0 13 * * *'
+    - cron: '7 12 * * *'
+    - cron: '7 13 * * *'
   workflow_dispatch:
 
 permissions:
@@ -15,7 +15,8 @@ permissions:
   id-token: write
 
 jobs:
-  build:
+  refresh-content:
+    if: github.event_name == 'schedule'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -30,8 +31,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Generate daily brief
-        if: github.event_name != 'push'
+      - name: Generate daily brief in 8 AM New York window
         env:
           TZ: America/New_York
         run: |
@@ -42,7 +42,6 @@ jobs:
           npm run generate-brief
 
       - name: Commit generated brief
-        if: github.event_name != 'push'
         run: |
           if git diff --quiet; then
             echo "No content changes to commit."
@@ -54,6 +53,22 @@ jobs:
           git add src/content/blog src/assets/generated
           git commit -m "Update daily briefs"
           git push origin HEAD:main
+
+  build:
+    if: github.event_name != 'schedule'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -72,6 +87,7 @@ jobs:
           path: ./dist
 
   deploy:
+    if: github.event_name != 'schedule'
     needs: build
     runs-on: ubuntu-latest
     environment:
