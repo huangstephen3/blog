@@ -96,35 +96,36 @@ const premiumCount = posts.filter((post) => post.data.premium).length;
 			}
 
 			.feature-card {
-				overflow: hidden;
-				position: relative;
-				min-height: 360px;
+				display: grid;
+				gap: 1rem;
+				padding: 1rem;
+				text-decoration: none;
 			}
 
 			.feature-card img {
 				display: block;
 				width: 100%;
-				height: 100%;
+				height: clamp(220px, 32vw, 360px);
 				object-fit: cover;
-				min-height: 360px;
+				border-radius: 18px;
 				filter: saturate(0.92) contrast(1.05);
 			}
 
 			.feature-caption {
-				position: absolute;
-				left: 1rem;
-				right: auto;
-				bottom: 1rem;
-				max-width: min(34rem, calc(100% - 2rem));
-				padding: 0.9rem 1rem;
-				border-radius: 18px;
-				background: rgba(15, 19, 23, 0.68);
-				color: white;
+				max-width: 44rem;
+				color: rgb(var(--ink));
+			}
+
+			.feature-caption strong {
+				display: block;
+				margin-bottom: 0.45rem;
+				font-size: clamp(1.35rem, 2.4vw, 2rem);
+				line-height: 1.15;
 			}
 
 			.feature-caption p {
 				margin: 0;
-				color: rgba(255, 255, 255, 0.8);
+				color: rgb(var(--muted));
 			}
 
 			.section-head {
@@ -296,6 +297,7 @@ const premiumCount = posts.filter((post) => post.data.premium).length;
 								{featured?.data.heroImage && <img src={featured.data.heroImage.src} alt={featured.data.title} />}
 								{featured && (
 									<div class="feature-caption">
+										<p class="eyebrow">Featured Brief</p>
 										<strong>{featured.data.title}</strong>
 										<p>{featured.data.description}</p>
 									</div>
