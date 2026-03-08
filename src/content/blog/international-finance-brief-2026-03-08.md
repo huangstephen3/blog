@@ -11,6 +11,8 @@ tags:
   - finance
   - markets
   - economy
+locale: "en"
+baseSlug: "international-finance-brief-2026-03-08"
 heroImage: "../../assets/generated/international-finance-brief-2026-03-08.svg"
 ---
 

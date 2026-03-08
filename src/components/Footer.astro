@@ -1,7 +1,14 @@
 ---
 import { SITE_AUTHOR, SITE_TITLE } from '../consts';
+import { DEFAULT_LOCALE, getMessages, localePath } from '../lib/i18n';
 import { withBase } from '../utils/paths';
 
+interface Props {
+	locale?: string;
+}
+
+const { locale = DEFAULT_LOCALE } = Astro.props;
+const messages = getMessages(locale);
 const year = new Date().getFullYear();
 ---
 
@@ -10,14 +17,13 @@ const year = new Date().getFullYear();
 		<div>
 			<p class="site-name">{SITE_TITLE}</p>
 			<p class="site-copy">
-				&copy; {year} {SITE_AUTHOR}. An independent AI newsroom tracking model launches, platform shifts,
-				infrastructure bets, and the signals shaping the next computing cycle.
+				&copy; {year} {SITE_AUTHOR}. {messages.footerCopy}
 			</p>
 		</div>
 		<div class="footer-links">
-			<a href={withBase('blog/')}>Briefs</a>
-			<a href={withBase('vip/')}>Membership</a>
-			<a href={withBase('login/')}>Log In</a>
+			<a href={withBase(localePath(locale, '/blog/').replace(/^\/+/, ''))}>{messages.footerBriefs}</a>
+			<a href={withBase('vip/')}>{messages.nav.membership}</a>
+			<a href={withBase('login/')}>{messages.login}</a>
 			<a href={withBase('rss.xml')}>RSS</a>
 		</div>
 	</div>

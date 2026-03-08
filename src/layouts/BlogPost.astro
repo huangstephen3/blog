@@ -5,14 +5,16 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
-import { SITE_LANG } from '../consts';
+import { DEFAULT_LOCALE, getLocale, getMessages } from '../lib/i18n';
 
 type Props = CollectionEntry<'blog'>['data'];
 
-const { title, description, pubDate, updatedDate, heroImage, tags = [], category, premium } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, tags = [], category, premium, locale = DEFAULT_LOCALE } = Astro.props;
+const messages = getMessages(locale);
+const localeMeta = getLocale(locale);
 ---
 
-<html lang={SITE_LANG}>
+<html lang={localeMeta.lang}>
 	<head>
 		<BaseHead title={title} description={description} image={heroImage} />
 		<style>
@@ -58,7 +60,7 @@ const { title, description, pubDate, updatedDate, heroImage, tags = [], category
 
 			h1 {
 				margin: 0.7rem 0 0.8rem;
-				font-size: clamp(1.9rem, 4vw, 2.8rem);
+				font-size: clamp(1.65rem, 3.6vw, 2.35rem);
 			}
 
 			.desc {
@@ -112,7 +114,7 @@ const { title, description, pubDate, updatedDate, heroImage, tags = [], category
 		</style>
 	</head>
 	<body>
-		<Header />
+		<Header locale={locale} />
 		<main>
 			<div class="post-shell">
 				<article class="post-main">
@@ -123,8 +125,8 @@ const { title, description, pubDate, updatedDate, heroImage, tags = [], category
 					)}
 					<div class="meta">
 						<span>{category}</span>
-						<span><FormattedDate date={pubDate} /></span>
-						{updatedDate && <span>Updated <FormattedDate date={updatedDate} /></span>}
+						<span><FormattedDate date={pubDate} locale={localeMeta.lang} /></span>
+						{updatedDate && <span>{messages.updated} <FormattedDate date={updatedDate} locale={localeMeta.lang} /></span>}
 					</div>
 					<h1>{title}</h1>
 					<p class="desc">{description}</p>
@@ -138,15 +140,13 @@ const { title, description, pubDate, updatedDate, heroImage, tags = [], category
 				</article>
 
 				<aside class="post-side">
-					<h2 class="side-title">Signal Notes</h2>
+					<h2 class="side-title">{messages.signalNotes}</h2>
 					<ul class="side-list">
-						<li>Each brief is written as an editor-led summary, not a scraped headline dump.</li>
-						<li>The login flow uses Supabase Magic Link, so readers never type a password on site.</li>
-						<li>The reader layer can later expand into premium notes, email briefings, and private archives.</li>
+						{messages.signalNoteItems.map((item) => <li>{item}</li>)}
 					</ul>
 				</aside>
 			</div>
 		</main>
-		<Footer />
+		<Footer locale={locale} />
 	</body>
 </html>

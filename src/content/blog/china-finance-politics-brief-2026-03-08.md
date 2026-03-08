@@ -11,6 +11,8 @@ tags:
   - china
   - finance
   - politics
+locale: "en"
+baseSlug: "china-finance-politics-brief-2026-03-08"
 heroImage: "../../assets/generated/china-finance-politics-brief-2026-03-08.svg"
 ---
 

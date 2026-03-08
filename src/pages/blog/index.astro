@@ -4,16 +4,20 @@ import BaseHead from '../../components/BaseHead.astro';
 import Footer from '../../components/Footer.astro';
 import FormattedDate from '../../components/FormattedDate.astro';
 import Header from '../../components/Header.astro';
-import { NEWS_SECTIONS, SITE_DESCRIPTION, SITE_LANG, SITE_TITLE } from '../../consts';
+import { NEWS_SECTIONS, SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
+import { DEFAULT_LOCALE, getLocale, getMessages } from '../../lib/i18n';
 import { withBase } from '../../utils/paths';
 
-const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+const locale = DEFAULT_LOCALE;
+const localeMeta = getLocale(locale);
+const messages = getMessages(locale);
+const posts = (await getCollection('blog', ({ data }) => !data.draft && (data.locale ?? 'en') === locale)).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 ---
 
 <!doctype html>
-<html lang={SITE_LANG}>
+<html lang={localeMeta.lang}>
 	<head>
 		<BaseHead title={`AI Briefs | ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
 		<style>
@@ -41,7 +45,7 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
 
 			.card h2 {
 				margin: 0.35rem 0 0.55rem;
-				font-size: 1.35rem;
+				font-size: 1.15rem;
 				color: rgb(var(--ink));
 			}
 
@@ -90,12 +94,12 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
 		</style>
 	</head>
 	<body>
-		<Header />
+		<Header locale={locale} />
 		<main>
 			<div class="page-title">
-				<p class="eyebrow">AI Brief Archive</p>
-				<h1>AI Brief Archive</h1>
-				<p>Every published brief, sorted by time, covering model launches, infrastructure moves, platform strategy, and subscriber previews.</p>
+				<p class="eyebrow">{messages.archiveEyebrow}</p>
+				<h1>{messages.archiveTitle}</h1>
+				<p>{messages.archiveDescription}</p>
 			</div>
 
 			<div class="section-pills">
@@ -109,8 +113,8 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
 							{post.data.heroImage && <img src={post.data.heroImage.src} alt={post.data.title} />}
 							<div class="meta">
 								<span>{post.data.category}</span>
-								<span><FormattedDate date={post.data.pubDate} /></span>
-								{post.data.premium && <span>Subscriber Preview</span>}
+								<span><FormattedDate date={post.data.pubDate} locale={localeMeta.lang} /></span>
+								{post.data.premium && <span>{messages.subscriberPreview}</span>}
 							</div>
 							<h2>{post.data.title}</h2>
 							<p>{post.data.description}</p>
@@ -122,6 +126,6 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
 				}
 			</section>
 		</main>
-		<Footer />
+		<Footer locale={locale} />
 	</body>
 </html>

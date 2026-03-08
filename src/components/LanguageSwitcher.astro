@@ -1,0 +1,48 @@
+---
+import { DEFAULT_LOCALE, LOCALES, getLocale, switchLocalePath } from '../lib/i18n';
+import { stripBase, withBase } from '../utils/paths';
+
+interface Props {
+	locale?: string;
+	pathname?: string;
+}
+
+const { locale = DEFAULT_LOCALE, pathname = '/' } = Astro.props;
+const currentLocale = getLocale(locale);
+const relativePath = stripBase(pathname);
+---
+
+<label class="language-switcher">
+	<span class="sr-only">Language</span>
+	<select
+		aria-label="Language"
+		onchange={`window.location.href=this.value`}
+	>
+		{
+			LOCALES.map((entry) => {
+				const nextPath = withBase(switchLocalePath(relativePath, entry.code).replace(/^\//, ''));
+				return (
+					<option value={nextPath} selected={entry.code === currentLocale.code}>
+						{entry.label}
+					</option>
+				);
+			})
+		}
+	</select>
+</label>
+
+<style>
+	.language-switcher {
+		display: inline-flex;
+		align-items: center;
+	}
+
+	.language-switcher select {
+		padding: 0.55rem 0.85rem;
+		border-radius: 999px;
+		border: 1px solid rgba(var(--line), 1);
+		background: rgba(var(--panel-strong), 0.92);
+		color: rgb(var(--ink));
+		font-size: 0.92rem;
+	}
+</style>

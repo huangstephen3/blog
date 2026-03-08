@@ -11,6 +11,8 @@ tags:
   - crypto
   - bitcoin
   - blockchain
+locale: "en"
+baseSlug: "crypto-brief-2026-03-08"
 heroImage: "../../assets/generated/crypto-brief-2026-03-08.svg"
 ---
 

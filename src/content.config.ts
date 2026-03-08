@@ -14,6 +14,8 @@ const blog = defineCollection({
 			premium: z.boolean().default(false),
 			category: z.string().default('AI Briefs'),
 			tags: z.array(z.string()).default([]),
+			locale: z.string().default('en'),
+			baseSlug: z.string().optional(),
 			heroImage: image().optional(),
 		}),
 });

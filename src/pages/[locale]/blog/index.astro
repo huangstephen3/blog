@@ -1,0 +1,73 @@
+---
+import { getCollection } from 'astro:content';
+import BaseHead from '../../../components/BaseHead.astro';
+import Footer from '../../../components/Footer.astro';
+import FormattedDate from '../../../components/FormattedDate.astro';
+import Header from '../../../components/Header.astro';
+import { NEWS_SECTIONS, SITE_DESCRIPTION, SITE_TITLE } from '../../../consts';
+import { DEFAULT_LOCALE, LOCALES, getLocale, getMessages, isLocale, localePath } from '../../../lib/i18n';
+import { withBase } from '../../../utils/paths';
+
+export function getStaticPaths() {
+	return LOCALES.filter((locale) => locale.code !== DEFAULT_LOCALE).map((locale) => ({
+		params: { locale: locale.code },
+	}));
+}
+
+const locale = isLocale(Astro.params.locale ?? '') ? Astro.params.locale! : DEFAULT_LOCALE;
+const localeMeta = getLocale(locale);
+const messages = getMessages(locale);
+const posts = (await getCollection('blog', ({ data }) => !data.draft && (data.locale ?? 'en') === locale)).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+const hrefFor = (path = '') => withBase(localePath(locale, path).replace(/^\/+/, ''));
+---
+
+<!doctype html>
+<html lang={localeMeta.lang}>
+	<head>
+		<BaseHead title={`${messages.archiveTitle} | ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
+		<style>
+			.archive-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+			.card { padding: 1rem; border-radius: 18px; background: rgb(var(--panel)); border: 1px solid rgba(var(--line), 1); text-decoration: none; }
+			.card img { width: 100%; height: 200px; object-fit: cover; border-radius: 14px; margin-bottom: 0.8rem; }
+			.card h2 { margin: 0.35rem 0 0.55rem; font-size: 1.05rem; color: rgb(var(--ink)); }
+			.card p { margin: 0; color: rgb(var(--muted)); }
+			.meta, .tag-row, .section-pills { display: flex; flex-wrap: wrap; gap: 0.5rem 0.8rem; }
+			.meta { font-size: 0.88rem; color: rgb(var(--muted)); }
+			.tag-row { margin-top: 0.75rem; }
+			.section-pills { gap: 0.55rem; margin: 0 0 1rem; }
+			.tag { display: inline-flex; padding: 0.22rem 0.62rem; border-radius: 999px; background: rgba(var(--accent), 0.08); color: rgb(var(--accent)); font-size: 0.84rem; }
+			@media (max-width: 860px) { .archive-grid { grid-template-columns: 1fr; } }
+		</style>
+	</head>
+	<body>
+		<Header locale={locale} />
+		<main>
+			<div class="page-title">
+				<p class="eyebrow">{messages.archiveEyebrow}</p>
+				<h1>{messages.archiveTitle}</h1>
+				<p>{messages.archiveDescription}</p>
+			</div>
+			<div class="section-pills">{NEWS_SECTIONS.map((section) => <span class="tag">{section.title}</span>)}</div>
+			<section class="archive-grid">
+				{
+					posts.map((post) => (
+						<a class="card" href={hrefFor(`/blog/${post.data.baseSlug ?? post.id}/`)}>
+							{post.data.heroImage && <img src={post.data.heroImage.src} alt={post.data.title} />}
+							<div class="meta">
+								<span>{post.data.category}</span>
+								<span><FormattedDate date={post.data.pubDate} locale={localeMeta.lang} /></span>
+								{post.data.premium && <span>{messages.subscriberPreview}</span>}
+							</div>
+							<h2>{post.data.title}</h2>
+							<p>{post.data.description}</p>
+							<div class="tag-row">{post.data.tags.map((tag) => <span class="tag">#{tag}</span>)}</div>
+						</a>
+					))
+				}
+			</section>
+		</main>
+		<Footer locale={locale} />
+	</body>
+</html>

@@ -11,6 +11,8 @@ tags:
   - us-politics
   - washington
   - policy
+locale: "en"
+baseSlug: "us-politics-brief-2026-03-08"
 heroImage: "../../assets/generated/us-politics-brief-2026-03-08.svg"
 ---
 
