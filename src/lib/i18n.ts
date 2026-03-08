@@ -54,6 +54,7 @@ const messages = {
 		nav: { home: 'Home', briefs: 'Briefs', membership: 'Membership', about: 'About' },
 		readerHub: 'Reader Hub',
 		login: 'Log In',
+		admin: 'Admin',
 		signedIn: 'Signed In',
 		footerCopy:
 			'An independent AI newsroom tracking model launches, platform shifts, infrastructure bets, and the signals shaping the next computing cycle.',
@@ -96,6 +97,7 @@ const messages = {
 		nav: { home: '首页', briefs: '快讯', membership: '会员', about: '关于' },
 		readerHub: '读者中心',
 		login: '登录',
+		admin: '后台',
 		signedIn: '已登录',
 		footerCopy: '一个独立运营的 AI 新闻站，追踪模型发布、平台变化、基础设施投入以及影响下一轮计算浪潮的关键信号。',
 		footerBriefs: '快讯',
@@ -136,6 +138,7 @@ const messages = {
 		nav: { home: '首頁', briefs: '快訊', membership: '會員', about: '關於' },
 		readerHub: '讀者中心',
 		login: '登入',
+		admin: '後台',
 		signedIn: '已登入',
 		footerCopy: '一個獨立運營的 AI 新聞站，追蹤模型發佈、平台變化、基礎設施投入，以及影響下一輪運算浪潮的關鍵訊號。',
 		footerBriefs: '快訊',
@@ -176,6 +179,7 @@ const messages = {
 		nav: { home: 'Accueil', briefs: 'Briefs', membership: 'Abonnement', about: 'À propos' },
 		readerHub: 'Espace lecteur',
 		login: 'Connexion',
+		admin: 'Admin',
 		signedIn: 'Connecté',
 		footerCopy:
 			'Une rédaction indépendante consacrée à l’IA, qui suit les lancements de modèles, les mouvements de plateformes, les paris sur l’infrastructure et les signaux qui façonnent la prochaine vague informatique.',
@@ -218,6 +222,7 @@ const messages = {
 		nav: { home: 'ホーム', briefs: 'ブリーフ', membership: 'メンバー', about: '概要' },
 		readerHub: '読者ハブ',
 		login: 'ログイン',
+		admin: '管理',
 		signedIn: 'ログイン済み',
 		footerCopy:
 			'モデル公開、プラットフォーム変化、インフラ投資、そして次の計算波を形づくるシグナルを追う独立系AIニュースルームです。',
@@ -260,6 +265,7 @@ const messages = {
 		nav: { home: 'Inicio', briefs: 'Briefs', membership: 'Membresía', about: 'Acerca de' },
 		readerHub: 'Centro de lectores',
 		login: 'Iniciar sesión',
+		admin: 'Admin',
 		signedIn: 'Conectado',
 		footerCopy:
 			'Una sala de redacción independiente sobre IA que sigue lanzamientos de modelos, movimientos de plataforma, apuestas de infraestructura y las señales que moldean la próxima ola de computación.',

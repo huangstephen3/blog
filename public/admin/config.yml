@@ -1,0 +1,96 @@
+backend:
+  name: github
+  repo: huangstephen3/blog
+  branch: main
+
+local_backend: true
+publish_mode: simple
+site_url: https://huangstephen3.github.io/blog/
+display_url: https://huangstephen3.github.io/blog/
+
+media_folder: "src/assets/uploads"
+public_folder: "../../assets/uploads"
+
+collections:
+  - name: "posts"
+    label: "Blog Posts"
+    label_singular: "Blog Post"
+    folder: "src/content/blog"
+    create: true
+    extension: "md"
+    format: "frontmatter"
+    slug: "{{slug}}"
+    identifier_field: "title"
+    summary: "{{title}} | {{category}} | {{locale}}"
+    sortable_fields:
+      - "pubDate"
+      - "updatedDate"
+      - "title"
+      - "locale"
+      - "category"
+      - "featured"
+      - "draft"
+    editor:
+      preview: false
+    fields:
+      - label: "Title"
+        name: "title"
+        widget: "string"
+      - label: "Description"
+        name: "description"
+        widget: "text"
+      - label: "Publish Date"
+        name: "pubDate"
+        widget: "datetime"
+      - label: "Updated Date"
+        name: "updatedDate"
+        widget: "datetime"
+        required: false
+      - label: "Draft"
+        name: "draft"
+        widget: "boolean"
+        default: false
+      - label: "Featured"
+        name: "featured"
+        widget: "boolean"
+        default: false
+      - label: "Premium"
+        name: "premium"
+        widget: "boolean"
+        default: false
+      - label: "Category"
+        name: "category"
+        widget: "select"
+        options:
+          - "AI"
+          - "International Finance"
+          - "US Politics"
+          - "China Finance & Politics"
+          - "Crypto"
+      - label: "Tags"
+        name: "tags"
+        widget: "list"
+        default: []
+      - label: "Locale"
+        name: "locale"
+        widget: "select"
+        default: "en"
+        options:
+          - { label: "English", value: "en" }
+          - { label: "简体中文", value: "zh-cn" }
+          - { label: "繁體中文", value: "zh-tw" }
+          - { label: "Français", value: "fr" }
+          - { label: "日本語", value: "ja" }
+          - { label: "Español", value: "es" }
+      - label: "Base Slug"
+        name: "baseSlug"
+        widget: "string"
+        required: false
+        hint: "Optional. Use this when multiple language files should share the same public article URL."
+      - label: "Hero Image"
+        name: "heroImage"
+        widget: "image"
+        required: false
+      - label: "Body"
+        name: "body"
+        widget: "markdown"

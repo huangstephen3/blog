@@ -75,6 +75,37 @@ PUBLIC_SUPABASE_ANON_KEY=your-public-anon-key
 
 然后在 GitHub 的 `Settings > Pages` 中把 `Source` 设为 `GitHub Actions`。
 
+## 网页后台 `/admin/`
+
+项目现在已经带了一个基于 `Decap CMS` 的网页后台入口：
+
+- 生产地址：`https://你的域名/admin/`
+- 当前项目地址：`https://huangstephen3.github.io/blog/admin/`
+
+它可以直接编辑：
+
+- `src/content/blog` 下的 Markdown 文章
+- 标题、描述、分类、标签、语言、封面图和正文
+
+### `/admin/` 要能真正登录，还差什么
+
+因为当前站点部署在 `GitHub Pages`，`Decap CMS` 的 `GitHub backend` 还需要一个 GitHub OAuth 授权回调服务。
+
+也就是说：
+
+- `/admin/` 页面和编辑表单已经在项目里
+- 但如果要在生产环境直接用 GitHub 登录并提交内容，还需要你配置一个 OAuth client / proxy
+
+最常见做法有两种：
+
+1. 接一个 GitHub OAuth proxy
+2. 或者继续用 GitHub 网页直接编辑仓库文件
+
+在没有 OAuth proxy 之前：
+
+- 本地开发可以配 `local_backend`
+- 线上 `/admin/` 的真正登录能力还不能完全代替 GitHub 网页编辑
+
 ## 常用命令
 
 - `npm run dev`
