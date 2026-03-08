@@ -10,13 +10,14 @@ const year = new Date().getFullYear();
 		<div>
 			<p class="site-name">{SITE_TITLE}</p>
 			<p class="site-copy">
-				&copy; {year} {SITE_AUTHOR}。一个独立运营的 AI 科技新闻站，专注模型、产品、创业与产业信号。
+				&copy; {year} {SITE_AUTHOR}. An independent AI newsroom tracking model launches, platform shifts,
+				infrastructure bets, and the signals shaping the next computing cycle.
 			</p>
 		</div>
 		<div class="footer-links">
-			<a href={withBase('blog/')}>AI快讯</a>
-			<a href={withBase('vip/')}>订阅计划</a>
-			<a href={withBase('login/')}>读者登录</a>
+			<a href={withBase('blog/')}>Briefs</a>
+			<a href={withBase('vip/')}>Membership</a>
+			<a href={withBase('login/')}>Log In</a>
 			<a href={withBase('rss.xml')}>RSS</a>
 		</div>
 	</div>

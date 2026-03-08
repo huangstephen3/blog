@@ -8,7 +8,7 @@ import { SITE_DESCRIPTION, SITE_LANG, SITE_TITLE, STARTER_STEPS } from '../const
 <!doctype html>
 <html lang={SITE_LANG}>
 	<head>
-		<BaseHead title={`关于本站 | ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
+		<BaseHead title={`About | ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
 		<style>
 			.about-grid {
 				display: grid;
@@ -45,24 +45,27 @@ import { SITE_DESCRIPTION, SITE_LANG, SITE_TITLE, STARTER_STEPS } from '../const
 			<div class="about-grid">
 				<section class="panel">
 					<p class="eyebrow">About The Desk</p>
-					<h1>这是一个独立写作者的 AI 新闻编辑室</h1>
+					<h1>An independent AI newsroom built for signal, not noise.</h1>
 					<p>
-						这个站点已经不再是模板式博客，而是你自己的 AI 科技媒体品牌。它会持续追踪模型发布、
-						产品更新、创业公司、芯片、Agent、政策和产业落地。
+						Signal Layer is no longer a generic blog shell. It is an editorial product focused on model releases,
+						platform updates, infrastructure spending, developer tools, policy moves, and the companies reshaping
+						the AI stack.
 					</p>
 					<p>
-						我保留了轻量的技术栈，是为了让你把注意力放在写作和选题，而不是后台维护。现在站点已经具备
-						外网访问、自动部署和读者登录入口，接下来最重要的是坚持更新内容。
+						The stack stays intentionally light so the work stays centered on reporting and editorial judgment.
+						The site already has public hosting, automatic deployment, RSS, and reader login wired in. The real
+						advantage now comes from publishing consistently.
 					</p>
 					<p>
-						如果你后续想把它做成更完整的 AI 新闻产品，我们还可以继续加入邮件简报、私密栏目、专题页、
-						评论区、资料库和会员订阅体系。
+						If you want to grow this into a fuller media product, the next layer can add premium newsletters,
+						private archives, thematic landing pages, reader comments, and paid memberships without changing the
+						core publishing flow.
 					</p>
 				</section>
 
 				<aside class="panel">
 					<p class="eyebrow">Editorial Loop</p>
-					<h2>你接下来最重要的事</h2>
+					<h2>What matters next</h2>
 					<ol class="step-list">
 						{STARTER_STEPS.map((step) => <li>{step}</li>)}
 					</ol>

@@ -9,7 +9,7 @@ import { withBase } from '../utils/paths';
 <!doctype html>
 <html lang={SITE_LANG}>
 	<head>
-		<BaseHead title={`登录 | ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
+		<BaseHead title={`Log In | ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
 		<style>
 			.auth-wrap {
 				display: grid;
@@ -69,31 +69,31 @@ import { withBase } from '../utils/paths';
 		<main>
 			<div class="page-title">
 				<p class="eyebrow">Readers Login</p>
-				<h1>读者登录</h1>
-				<p>输入邮箱后，系统会发送 Magic Link 到你的邮箱。点击邮件中的链接即可进入读者中心。</p>
+				<h1>Enter the reader layer.</h1>
+				<p>Type your email and the site will send a Magic Link. Open the email, click once, and you will land in the member area.</p>
 			</div>
 
 			<div class="auth-wrap">
 				<section class="panel" id="login-panel" data-member-redirect={withBase('member/')}>
-					<h2>邮箱进入读者区</h2>
-					<p>这一版保持轻量，不要求你输入密码，方便读者快速进入 AI 晨报和会员入口。</p>
+					<h2>Email-based access</h2>
+					<p>This flow stays intentionally light: no password wall, less friction, and a cleaner path into future daily briefs and subscriber-only notes.</p>
 					<form id="login-form">
 						<label>
-							邮箱地址
+							Email address
 							<input id="email" type="email" placeholder="name@example.com" required />
 						</label>
-						<button class="button" type="submit">发送登录链接</button>
+						<button class="button" type="submit">Send Magic Link</button>
 					</form>
 					<p class="status" id="status"></p>
 				</section>
 
 				<aside class="panel">
-					<h2>为什么先用这种登录方式</h2>
+					<h2>Why start with Magic Link</h2>
 					<ul class="help-list">
-						<li>读者进入门槛更低。</li>
-						<li>前期维护成本更轻。</li>
-						<li>适合独立新闻站快速启动订阅系统。</li>
-						<li>后续依然可以升级成更完整的会员权限。</li>
+						<li>Lower friction for new readers.</li>
+						<li>Less maintenance overhead in the early stage.</li>
+						<li>A faster path to a working subscription funnel.</li>
+						<li>Easy to expand later into richer account permissions.</li>
 					</ul>
 				</aside>
 			</div>
@@ -122,17 +122,17 @@ import { withBase } from '../utils/paths';
 				event.preventDefault();
 
 				if (!client) {
-					if (status) status.textContent = '还没配置 Supabase 环境变量，暂时无法发送登录链接。';
+					if (status) status.textContent = 'Supabase environment variables are missing, so Magic Link is currently unavailable.';
 					return;
 				}
 
 				const email = emailInput?.value.trim() ?? '';
 				if (!email) {
-					if (status) status.textContent = '请先输入邮箱。';
+					if (status) status.textContent = 'Please enter your email first.';
 					return;
 				}
 
-				if (status) status.textContent = '正在发送登录链接...';
+				if (status) status.textContent = 'Sending Magic Link...';
 
 				const { error } = await client.auth.signInWithOtp({
 					email,
@@ -143,8 +143,8 @@ import { withBase } from '../utils/paths';
 
 				if (status) {
 					status.textContent = error
-						? `发送失败：${error.message}`
-						: '邮件已发送，请去邮箱点击登录链接。';
+						? `Send failed: ${error.message}`
+						: 'Email sent. Open your inbox and click the login link.';
 				}
 			});
 		</script>

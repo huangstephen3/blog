@@ -124,12 +124,12 @@ const { title, description, pubDate, updatedDate, heroImage, tags = [], category
 					<div class="meta">
 						<span>{category}</span>
 						<span><FormattedDate date={pubDate} /></span>
-						{updatedDate && <span>更新于 <FormattedDate date={updatedDate} /></span>}
+						{updatedDate && <span>Updated <FormattedDate date={updatedDate} /></span>}
 					</div>
 					<h1>{title}</h1>
 					<p class="desc">{description}</p>
 					<div class="badges">
-						{premium && <span class="badge">会员内容预告</span>}
+						{premium && <span class="badge">Subscriber Preview</span>}
 						{tags.map((tag: string) => <span class="badge">#{tag}</span>)}
 					</div>
 					<div class="prose">
@@ -138,11 +138,11 @@ const { title, description, pubDate, updatedDate, heroImage, tags = [], category
 				</article>
 
 				<aside class="post-side">
-					<h2 class="side-title">编辑注</h2>
+					<h2 class="side-title">Signal Notes</h2>
 					<ul class="side-list">
-						<li>这是一份独立 AI 新闻站的文章页，适合发快讯、产品观察和行业判断。</li>
-						<li>会员登录使用 Magic Link，用户无需在页面输入密码。</li>
-						<li>如果后续要做更深的会员内容，可以继续接邮件晨报、专栏和权限控制。</li>
+						<li>Each brief is written as an editor-led summary, not a scraped headline dump.</li>
+						<li>The login flow uses Supabase Magic Link, so readers never type a password on site.</li>
+						<li>The reader layer can later expand into premium notes, email briefings, and private archives.</li>
 					</ul>
 				</aside>
 			</div>

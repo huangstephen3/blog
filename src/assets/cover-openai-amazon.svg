@@ -1,0 +1,19 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="900" fill="#07111B"/>
+  <rect x="64" y="64" width="1472" height="772" rx="28" fill="#0D1827" stroke="#21354C"/>
+  <path d="M64 250H1536" stroke="#1C3047" stroke-width="2"/>
+  <text x="112" y="178" fill="#8EF7FF" font-family="Arial, sans-serif" font-size="24" letter-spacing="6">OPENAI | FEB 27 2026</text>
+  <text x="112" y="350" fill="#ECF7FF" font-family="Arial, sans-serif" font-size="90" font-weight="700">OpenAI lands</text>
+  <text x="112" y="442" fill="#ECF7FF" font-family="Arial, sans-serif" font-size="90" font-weight="700">Amazon backing</text>
+  <text x="112" y="536" fill="#94AFC5" font-family="Arial, sans-serif" font-size="34">$110B in new investment and an AWS partnership reset the scale race.</text>
+  <rect x="964" y="156" width="444" height="540" rx="24" fill="#101F32" stroke="#2F455D"/>
+  <text x="1016" y="248" fill="#37E5CB" font-family="Arial, sans-serif" font-size="22" letter-spacing="4">KEY NUMBERS</text>
+  <text x="1016" y="354" fill="#ECF7FF" font-family="Arial, sans-serif" font-size="72" font-weight="700">$110B</text>
+  <text x="1016" y="396" fill="#94AFC5" font-family="Arial, sans-serif" font-size="28">new funding announced</text>
+  <text x="1016" y="504" fill="#ECF7FF" font-family="Arial, sans-serif" font-size="72" font-weight="700">900M</text>
+  <text x="1016" y="546" fill="#94AFC5" font-family="Arial, sans-serif" font-size="28">weekly ChatGPT users</text>
+  <text x="1016" y="654" fill="#ECF7FF" font-family="Arial, sans-serif" font-size="72" font-weight="700">50M</text>
+  <text x="1016" y="696" fill="#94AFC5" font-family="Arial, sans-serif" font-size="28">consumer subscribers</text>
+  <rect x="112" y="642" width="724" height="100" rx="20" fill="#101F32"/>
+  <text x="152" y="704" fill="#8EF7FF" font-family="Arial, sans-serif" font-size="28">Why it matters: capital, cloud distribution, and custom silicon are converging.</text>
+</svg>

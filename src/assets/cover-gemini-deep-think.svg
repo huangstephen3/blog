@@ -1,0 +1,14 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="900" fill="#070D19"/>
+  <rect x="64" y="64" width="1472" height="772" rx="28" fill="#0E1630" stroke="#2A3C63"/>
+  <rect x="994" y="156" width="414" height="588" rx="28" fill="#121D3C"/>
+  <text x="112" y="176" fill="#9FB2FF" font-family="Arial, sans-serif" font-size="24" letter-spacing="6">GOOGLE DEEPMIND | FEB 11 2026</text>
+  <text x="112" y="340" fill="#ECF7FF" font-family="Arial, sans-serif" font-size="88" font-weight="700">Gemini Deep Think</text>
+  <text x="112" y="430" fill="#ECF7FF" font-family="Arial, sans-serif" font-size="88" font-weight="700">moves into view</text>
+  <text x="112" y="514" fill="#94AFC5" font-family="Arial, sans-serif" font-size="34">Google turns a research-grade reasoning mode into a product signal for science and engineering work.</text>
+  <circle cx="1200" cy="332" r="118" fill="#818CF8" fill-opacity="0.18"/>
+  <path d="M1200 238L1218 298L1282 298L1230 336L1248 396L1200 358L1152 396L1170 336L1118 298L1182 298L1200 238Z" fill="#8EF7FF"/>
+  <text x="1048" y="520" fill="#8EF7FF" font-family="Arial, sans-serif" font-size="26" letter-spacing="4">ROLLING OUT</text>
+  <text x="1048" y="590" fill="#ECF7FF" font-family="Arial, sans-serif" font-size="42" font-weight="700">Deep Think</text>
+  <text x="1048" y="648" fill="#94AFC5" font-family="Arial, sans-serif" font-size="28">Available for Google AI Ultra subscribers with Gemini 3.1 Pro in the February Gemini Drop.</text>
+</svg>

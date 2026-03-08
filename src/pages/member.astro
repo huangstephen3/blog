@@ -9,7 +9,7 @@ import { withBase } from '../utils/paths';
 <!doctype html>
 <html lang={SITE_LANG}>
 	<head>
-		<BaseHead title={`会员中心 | ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
+		<BaseHead title={`Member Area | ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
 		<style>
 			.member-grid {
 				display: grid;
@@ -44,35 +44,35 @@ import { withBase } from '../utils/paths';
 		<main>
 			<div class="page-title">
 				<p class="eyebrow">Readers Room</p>
-				<h1>读者中心</h1>
-				<p>这是你的 AI 新闻站读者入口。后续可以继续扩展成专栏、收藏、专题和每日晨报订阅。</p>
+				<h1>Your reader workspace.</h1>
+				<p>This is the member entry point for daily briefs, saved reads, premium notes, and future subscription products.</p>
 			</div>
 
-			<div id="member-loading" class="panel" data-login-redirect={withBase('login/')}>正在验证登录状态...</div>
+			<div id="member-loading" class="panel" data-login-redirect={withBase('login/')}>Checking your session...</div>
 
 			<div id="member-app" class="member-grid hidden">
 				<section class="panel">
 					<p class="eyebrow">Reader Session</p>
-					<h2>欢迎回来</h2>
-					<p class="info">当前登录邮箱：<strong id="member-email">-</strong></p>
-					<p class="info">这里后续可以接：</p>
+					<h2>Welcome back</h2>
+					<p class="info">Signed in as: <strong id="member-email">-</strong></p>
+					<p class="info">This area can expand into:</p>
 					<ul>
-						<li>今日 AI 晨报入口</li>
-						<li>专题收藏和阅读清单</li>
-						<li>会员专栏与账号设置</li>
+						<li>A members-only morning brief</li>
+						<li>Saved story lists and topic collections</li>
+						<li>Premium columns and account settings</li>
 					</ul>
 					<p style="margin-top: 1rem;">
-						<button class="button" id="logout-button" type="button">退出登录</button>
+						<button class="button" id="logout-button" type="button">Log Out</button>
 					</p>
 				</section>
 
 				<aside class="panel">
 					<p class="eyebrow">Next Phase</p>
-					<h2>下一阶段最值得做的事</h2>
+					<h2>Highest-value next steps</h2>
 					<ul>
-						<li>按日期归档每日 AI Brief</li>
-						<li>给会员开放深度观察栏目</li>
-						<li>按订阅等级显示内容</li>
+						<li>Archive daily briefs by date and topic</li>
+						<li>Open deeper analysis to subscribers</li>
+						<li>Gate content by membership tier</li>
 					</ul>
 				</aside>
 			</div>
@@ -90,7 +90,7 @@ import { withBase } from '../utils/paths';
 			const client = getSupabaseBrowserClient();
 
 			if (!client) {
-				if (loading) loading.textContent = '还没配置 Supabase 环境变量，会员中心暂时不可用。';
+				if (loading) loading.textContent = 'Supabase environment variables are missing, so the member area is unavailable.';
 			} else {
 				const { data } = await client.auth.getSession();
 				const session = data.session;

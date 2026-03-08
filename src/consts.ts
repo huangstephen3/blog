@@ -1,40 +1,42 @@
-export const SITE_TITLE = 'Stephen AI Dispatch';
-export const SITE_DESCRIPTION = '一个面向中文读者的 AI 科技新闻站，追踪模型发布、产品动作、公司动态与真实落地信号。';
-export const SITE_TAGLINE = '每天筛选最值得看的 AI 新闻，把噪音压缩成可读、可转发、可行动的情报。';
+export const SITE_TITLE = 'Signal Layer';
+export const SITE_DESCRIPTION =
+	'An independent AI news desk tracking model launches, platform updates, infrastructure moves, and the companies shaping the next wave of computing.';
+export const SITE_TAGLINE =
+	'One sharp AI story a day, distilled into signals you can read fast, share easily, and act on.';
 export const SITE_AUTHOR = 'Stephen';
-export const SITE_LANG = 'zh-CN';
+export const SITE_LANG = 'en';
 
 export const NAV_LINKS = [
-	{ href: '/', label: '首页' },
-	{ href: '/blog/', label: 'AI快讯' },
-	{ href: '/vip/', label: '订阅计划' },
-	{ href: '/about/', label: '编辑室' },
+	{ href: '/', label: 'Home' },
+	{ href: '/blog/', label: 'Briefs' },
+	{ href: '/vip/', label: 'Membership' },
+	{ href: '/about/', label: 'About' },
 ];
 
 export const HOME_FEATURES = [
 	{
-		title: '每日快讯',
-		description: '把每天的 AI 发布、融资、模型更新和平台动作整理成高密度新闻流。',
+		title: 'Daily Briefs',
+		description: 'A focused daily file on the AI story that matters most, not a flood of recycled headlines.',
 	},
 	{
-		title: '编辑筛选',
-		description: '不追求机械搬运，而是筛选真正有价值的产品信号与产业影响。',
+		title: 'Editorial Filter',
+		description: 'Coverage is shaped by signal, product impact, and market relevance instead of raw volume.',
 	},
 	{
-		title: '订阅读者',
-		description: '站点已经接好登录与订阅入口，后续可以扩展成会员简报与专属栏目。',
+		title: 'Reader Layer',
+		description: 'Login and membership are already wired in, ready for premium briefings and subscriber-only analysis.',
 	},
 ];
 
 export const MEMBER_BENEFITS = [
-	'每天收到一篇精编 AI 快讯或晨报',
-	'获取模型、工具、融资与政策信号的专题整理',
-	'为后续扩展成邮件订阅、会员专栏和资料库预留空间',
+	'Receive one tightly edited AI briefing each day',
+	'Get topic bundles around models, tools, funding, policy, and infrastructure',
+	'Grow into premium newsletters, members-only notes, and a private research archive',
 ];
 
 export const STARTER_STEPS = [
-	'把 Supabase 登录和 GitHub Pages 保持在线，确保编辑后台可用。',
-	'运行 `npm run new-post -- 文章标题` 创建新文章草稿。',
-	'把每日 AI 新闻整理成一篇 Markdown 发布到 `src/content/blog/`。',
-	'持续优化栏目、标签和订阅计划，让站点越来越像你的 AI 编辑品牌。',
+	'Keep GitHub Pages and Supabase online so publishing and reader access stay stable.',
+	'Run `npm run new-post -- "Story Title"` to create a new draft.',
+	'Publish one real AI news post per day to `src/content/blog/`.',
+	'Keep refining beats, tags, and membership so the site feels like a real editorial product.',
 ];

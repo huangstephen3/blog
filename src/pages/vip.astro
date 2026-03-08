@@ -9,7 +9,7 @@ import { withBase } from '../utils/paths';
 <!doctype html>
 <html lang={SITE_LANG}>
 	<head>
-		<BaseHead title={`会员专区 | ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
+		<BaseHead title={`Membership | ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
 		<style>
 			.vip-grid {
 				display: grid;
@@ -56,17 +56,17 @@ import { withBase } from '../utils/paths';
 		<main>
 			<div class="page-title">
 				<p class="eyebrow">Subscription</p>
-				<h1>订阅计划</h1>
-				<p>这里不再是模板式会员页，而是未来 AI 晨报、专题观察和会员栏目入口的起点。</p>
+				<h1>Membership starts with better signal.</h1>
+				<p>This is the launch point for a tighter editorial product: faster daily briefs, deeper analysis, and a cleaner reader relationship.</p>
 			</div>
 
 			<div class="vip-grid">
 				<section class="panel">
 					<p class="eyebrow">Why Subscribe</p>
-					<h2>读者订阅之后能得到什么</h2>
+					<h2>What readers get first</h2>
 					<p>
-						第一阶段先把每日 AI 快讯、重点产品动向和模型专题做扎实。订阅区的意义不是堆功能，
-						而是给读者一个更稳定、更有节奏的情报入口。
+						The first job is not feature bloat. It is building a dependable editorial engine around one real AI story
+						each day, sharper product tracking, and clean topic-based analysis that saves readers time.
 					</p>
 					<ul class="benefits">
 						{MEMBER_BENEFITS.map((item) => <li>{item}</li>)}
@@ -75,18 +75,18 @@ import { withBase } from '../utils/paths';
 
 				<aside class="price-card">
 					<p class="eyebrow">Phase One</p>
-					<h2>先做内容引擎</h2>
+					<h2>Build the content engine first</h2>
 					<p class="price">Daily Brief</p>
-					<p class="note">这一步先让网站持续稳定地产出 AI 新闻内容，再决定后续变现和会员层级。</p>
-					<p class="note">后续可以继续补：</p>
+					<p class="note">The smartest first move is consistent editorial output. Monetization and tiering should come after the habit of publishing is strong.</p>
+					<p class="note">Later layers can add:</p>
 					<ul class="benefits">
-						<li>晨报邮件</li>
-						<li>会员专栏</li>
-						<li>资料库与专题页</li>
-						<li>付费订阅与评论</li>
+						<li>Email briefings</li>
+						<li>Premium columns</li>
+						<li>Research archives and topic pages</li>
+						<li>Paid memberships and comments</li>
 					</ul>
 					<p style="margin-top: 1rem;">
-						<a class="button" href={withBase('login/')}>加入读者入口</a>
+						<a class="button" href={withBase('login/')}>Join the reader layer</a>
 					</p>
 				</aside>
 			</div>

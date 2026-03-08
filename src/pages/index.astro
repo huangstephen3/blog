@@ -269,9 +269,9 @@ const premiumCount = posts.filter((post) => post.data.premium).length;
 								<p>{SITE_DESCRIPTION}</p>
 								<p>{SITE_TAGLINE}</p>
 								<div class="hero-actions">
-									<a class="button" href={withBase('blog/')}>进入今日快讯</a>
-									<a class="button button-soft" href={withBase('vip/')}>查看订阅计划</a>
-									<a class="button button-soft" href={withBase('login/')}>读者登录</a>
+									<a class="button" href={withBase('blog/')}>Open the briefs</a>
+									<a class="button button-soft" href={withBase('vip/')}>View membership</a>
+									<a class="button button-soft" href={withBase('login/')}>Reader login</a>
 								</div>
 								<div class="stat-grid">
 									<div class="stat-card">
@@ -304,13 +304,13 @@ const premiumCount = posts.filter((post) => post.data.premium).length;
 						<div class="section-head">
 							<div>
 								<p class="eyebrow">Daily Signal Feed</p>
-								<h2>今日情报流</h2>
+								<h2>Today&apos;s signal feed</h2>
 							</div>
-							<a href={withBase('blog/')}>查看全部快讯</a>
+							<a href={withBase('blog/')}>Browse all briefs</a>
 						</div>
 
 						<div class="search-box">
-							<input id="post-search" type="search" placeholder="搜索模型、公司、产品或栏目" />
+							<input id="post-search" type="search" placeholder="Search models, companies, products, or topics" />
 						</div>
 
 						<div class="post-list" id="post-list">
@@ -325,7 +325,7 @@ const premiumCount = posts.filter((post) => post.data.premium).length;
 										<div class="meta-row">
 											<span>{post.data.category}</span>
 											<span><FormattedDate date={post.data.pubDate} /></span>
-											{post.data.premium && <span>订阅预告</span>}
+											{post.data.premium && <span>Subscriber Preview</span>}
 										</div>
 										<h3>{post.data.title}</h3>
 										<p>{post.data.description}</p>
@@ -342,24 +342,24 @@ const premiumCount = posts.filter((post) => post.data.premium).length;
 				<aside class="side-column">
 					<section class="side-card">
 						<p class="eyebrow">Readers Club</p>
-						<h3>把网站变成你的 AI 读者俱乐部</h3>
-						<p>登录后可以进入读者中心。后续这里可以继续长成每日邮件、专栏、资料库和专题订阅。</p>
+						<h3>Turn the site into a real reader product</h3>
+						<p>The login layer is already live. From here, it can grow into email briefings, premium notes, saved reads, and a proper subscriber experience.</p>
 						<div class="hero-actions">
-							<a class="button" href={withBase('login/')}>进入读者入口</a>
+							<a class="button" href={withBase('login/')}>Enter reader hub</a>
 						</div>
 					</section>
 
 					<section class="side-card">
 						<p class="eyebrow">Editorial Spine</p>
-						<h3>编辑主轴</h3>
+						<h3>Editorial spine</h3>
 						<ul>
-							{HOME_FEATURES.map((item) => <li><strong>{item.title}</strong>：{item.description}</li>)}
+							{HOME_FEATURES.map((item) => <li><strong>{item.title}</strong>: {item.description}</li>)}
 						</ul>
 					</section>
 
 					<section class="side-card">
 						<p class="eyebrow">Subscription</p>
-						<h3>订阅读者会得到什么</h3>
+						<h3>What members get</h3>
 						<ul>
 							{MEMBER_BENEFITS.map((item) => <li>{item}</li>)}
 						</ul>
@@ -367,7 +367,7 @@ const premiumCount = posts.filter((post) => post.data.premium).length;
 
 					<section class="side-card">
 						<p class="eyebrow">Coverage</p>
-						<h3>追踪栏目</h3>
+						<h3>Coverage map</h3>
 						<div class="category-list">
 							{categories.map((category) => <span class="category-pill">{category}</span>)}
 						</div>
@@ -375,7 +375,7 @@ const premiumCount = posts.filter((post) => post.data.premium).length;
 
 					<section class="side-card">
 						<p class="eyebrow">Signal Tags</p>
-						<h3>高频主题</h3>
+						<h3>Recurring topics</h3>
 						<div class="tag-cloud">
 							{hotTags.map((tag) => <a href={withBase('blog/')}>#{tag}</a>)}
 						</div>

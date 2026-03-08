@@ -7,7 +7,7 @@ import { withBase } from '../utils/paths';
 <header class="site-header">
 	<div class="inner">
 		<div class="brand">
-			<p class="mini">Daily AI Newsroom</p>
+			<p class="mini">Independent AI Signal Desk</p>
 			<a class="brand-link" href={withBase()}>{SITE_TITLE}</a>
 		</div>
 
@@ -20,8 +20,8 @@ import { withBase } from '../utils/paths';
 		</nav>
 
 		<div class="auth-actions">
-			<a class="member-link" href={withBase('member/')}>读者中心</a>
-			<a class="login-link" id="auth-link" href={withBase('login/')}>登录</a>
+			<a class="member-link" href={withBase('member/')}>Reader Hub</a>
+			<a class="login-link" id="auth-link" href={withBase('login/')}>Log In</a>
 		</div>
 	</div>
 </header>
@@ -35,7 +35,7 @@ import { withBase } from '../utils/paths';
 	if (authLink && client) {
 		const { data } = await client.auth.getSession();
 		if (data.session) {
-			authLink.textContent = '已登录';
+			authLink.textContent = 'Signed In';
 			authLink.setAttribute('href', authLink.getAttribute('href')?.replace('/login/', '/member/') ?? '/');
 		}
 	}
@@ -47,7 +47,7 @@ import { withBase } from '../utils/paths';
 		top: 0;
 		z-index: 20;
 		backdrop-filter: blur(14px);
-		background: rgba(245, 248, 246, 0.78);
+		background: rgba(8, 13, 21, 0.78);
 		border-bottom: 1px solid rgba(var(--line), 1);
 	}
 
@@ -66,7 +66,8 @@ import { withBase } from '../utils/paths';
 		font-size: 1.2rem;
 		font-weight: 800;
 		text-decoration: none;
-		font-family: Georgia, "Times New Roman", "Songti SC", serif;
+		font-family: "Sora", "Space Grotesk", "Avenir Next", sans-serif;
+		letter-spacing: 0.02em;
 	}
 
 	.mini {
@@ -93,8 +94,8 @@ import { withBase } from '../utils/paths';
 
 	.nav-links :global(a.active),
 	.nav-links :global(a:hover) {
-		color: rgb(var(--paper));
-		background: rgb(var(--accent));
+		color: rgb(var(--accent-strong));
+		background: rgba(var(--accent), 0.16);
 	}
 
 	.auth-actions {
@@ -113,13 +114,13 @@ import { withBase } from '../utils/paths';
 
 	.member-link {
 		color: rgb(var(--ink));
-		background: rgba(var(--paper), 0.72);
+		background: rgba(var(--paper), 0.04);
 		border: 1px solid rgba(var(--line), 1);
 	}
 
 	.login-link {
-		color: rgb(var(--panel));
-		background: rgb(var(--accent));
+		color: rgb(var(--surface));
+		background: linear-gradient(135deg, rgb(var(--accent-strong)), rgb(var(--accent)));
 	}
 
 	@media (max-width: 900px) {
