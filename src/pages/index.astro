@@ -46,14 +46,15 @@ const premiumCount = posts.filter((post) => post.data.premium).length;
 
 			.hero-grid {
 				display: grid;
-				grid-template-columns: 1.1fr 0.9fr;
-				gap: 1rem;
+				grid-template-columns: 1fr;
+				gap: 1.1rem;
 			}
 
 			.hero-card h1 {
 				margin: 0.5rem 0 0.8rem;
 				font-size: clamp(2.5rem, 5.5vw, 4.6rem);
 				line-height: 1.06;
+				max-width: 11ch;
 			}
 
 			.hero-card p {
@@ -77,6 +78,7 @@ const premiumCount = posts.filter((post) => post.data.premium).length;
 			.stat-card {
 				padding: 0.95rem 1rem;
 				background: rgba(var(--panel-strong), 0.85);
+				min-width: 0;
 			}
 
 			.stat-label {
@@ -96,6 +98,7 @@ const premiumCount = posts.filter((post) => post.data.premium).length;
 			.feature-card {
 				overflow: hidden;
 				position: relative;
+				min-height: 360px;
 			}
 
 			.feature-card img {
@@ -103,15 +106,16 @@ const premiumCount = posts.filter((post) => post.data.premium).length;
 				width: 100%;
 				height: 100%;
 				object-fit: cover;
-				min-height: 280px;
+				min-height: 360px;
 				filter: saturate(0.92) contrast(1.05);
 			}
 
 			.feature-caption {
 				position: absolute;
 				left: 1rem;
-				right: 1rem;
+				right: auto;
 				bottom: 1rem;
+				max-width: min(34rem, calc(100% - 2rem));
 				padding: 0.9rem 1rem;
 				border-radius: 18px;
 				background: rgba(15, 19, 23, 0.68);
