@@ -1,0 +1,96 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { MEMBER_BENEFITS, SITE_DESCRIPTION, SITE_LANG, SITE_TITLE } from '../consts';
+import { withBase } from '../utils/paths';
+---
+
+<!doctype html>
+<html lang={SITE_LANG}>
+	<head>
+		<BaseHead title={`会员专区 | ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
+		<style>
+			.vip-grid {
+				display: grid;
+				grid-template-columns: minmax(0, 1fr) 330px;
+				gap: 1rem;
+			}
+
+			.panel,
+			.price-card {
+				padding: 1.2rem;
+				border-radius: 20px;
+				background: rgb(var(--panel));
+				border: 1px solid rgba(var(--line), 1);
+			}
+
+			.benefits {
+				margin: 0;
+				padding-left: 1rem;
+			}
+
+			.benefits li + li {
+				margin-top: 0.6rem;
+			}
+
+			.price {
+				margin: 0.5rem 0;
+				font-size: 2.4rem;
+				font-weight: 800;
+			}
+
+			.note {
+				color: rgb(var(--muted));
+			}
+
+			@media (max-width: 900px) {
+				.vip-grid {
+					grid-template-columns: 1fr;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<div class="page-title">
+				<p class="eyebrow">VIP Zone</p>
+				<h1>会员专区展示页</h1>
+				<p>这个页面已经做成了类似资源站/会员站的展示结构，后面可以继续接支付和真实权限。</p>
+			</div>
+
+			<div class="vip-grid">
+				<section class="panel">
+					<p class="eyebrow">Member Benefits</p>
+					<h2>会员版第一阶段先做什么</h2>
+					<p>
+						现在我们先把页面形态、登录入口和会员中心做出来。这样你的站点看起来已经是“可运营”的，
+						后续再逐步补真实付费逻辑。
+					</p>
+					<ul class="benefits">
+						{MEMBER_BENEFITS.map((item) => <li>{item}</li>)}
+					</ul>
+				</section>
+
+				<aside class="price-card">
+					<p class="eyebrow">Launch Plan</p>
+					<h2>先上线，再迭代</h2>
+					<p class="price">免费起步</p>
+					<p class="note">当前版本重点是样式、登录和自动部署，不在第一阶段强推复杂后端。</p>
+					<p class="note">如果你后面准备做变现，我们可以继续补：</p>
+					<ul class="benefits">
+						<li>订单和支付</li>
+						<li>会员权限</li>
+						<li>私密下载链接</li>
+						<li>投稿与评论</li>
+					</ul>
+					<p style="margin-top: 1rem;">
+						<a class="button" href={withBase('login/')}>先体验登录</a>
+					</p>
+				</aside>
+			</div>
+		</main>
+		<Footer />
+	</body>
+</html>

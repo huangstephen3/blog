@@ -1,0 +1,152 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+import Header from '../components/Header.astro';
+import { SITE_LANG } from '../consts';
+
+type Props = CollectionEntry<'blog'>['data'];
+
+const { title, description, pubDate, updatedDate, heroImage, tags = [], category, premium } = Astro.props;
+---
+
+<html lang={SITE_LANG}>
+	<head>
+		<BaseHead title={title} description={description} image={heroImage} />
+		<style>
+			.post-shell {
+				display: grid;
+				grid-template-columns: minmax(0, 1fr) 300px;
+				gap: 1rem;
+			}
+
+			.post-main,
+			.post-side {
+				background: rgb(var(--panel));
+				border: 1px solid rgba(var(--line), 1);
+				border-radius: 20px;
+			}
+
+			.post-main {
+				padding: 1.1rem;
+			}
+
+			.post-side {
+				padding: 1.2rem;
+				height: fit-content;
+			}
+
+			.hero {
+				margin-bottom: 1.2rem;
+			}
+
+			.hero img {
+				display: block;
+				width: 100%;
+				border-radius: 16px;
+			}
+
+			.meta {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.55rem 0.9rem;
+				color: rgb(var(--muted));
+				font-size: 0.92rem;
+			}
+
+			h1 {
+				margin: 0.7rem 0 0.8rem;
+				font-size: clamp(2rem, 5vw, 3.4rem);
+			}
+
+			.desc {
+				margin: 0 0 1rem;
+				color: rgb(var(--muted));
+			}
+
+			.badges {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.5rem;
+				margin-bottom: 1rem;
+			}
+
+			.badge {
+				padding: 0.28rem 0.72rem;
+				border-radius: 999px;
+				background: rgba(var(--accent), 0.09);
+				color: rgb(var(--accent));
+				font-size: 0.88rem;
+			}
+
+			.prose {
+				color: rgb(var(--ink));
+			}
+
+			.prose :global(p) {
+				margin: 0 0 1rem;
+			}
+
+			.side-title {
+				margin: 0 0 0.8rem;
+				font-size: 1rem;
+			}
+
+			.side-list {
+				margin: 0;
+				padding-left: 1rem;
+				color: rgb(var(--muted));
+			}
+
+			.side-list li + li {
+				margin-top: 0.6rem;
+			}
+
+			@media (max-width: 900px) {
+				.post-shell {
+					grid-template-columns: 1fr;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<div class="post-shell">
+				<article class="post-main">
+					{heroImage && (
+						<div class="hero">
+							<Image width={1280} height={720} src={heroImage} alt={title} />
+						</div>
+					)}
+					<div class="meta">
+						<span>{category}</span>
+						<span><FormattedDate date={pubDate} /></span>
+						{updatedDate && <span>更新于 <FormattedDate date={updatedDate} /></span>}
+					</div>
+					<h1>{title}</h1>
+					<p class="desc">{description}</p>
+					<div class="badges">
+						{premium && <span class="badge">会员内容预告</span>}
+						{tags.map((tag: string) => <span class="badge">#{tag}</span>)}
+					</div>
+					<div class="prose">
+						<slot />
+					</div>
+				</article>
+
+				<aside class="post-side">
+					<h2 class="side-title">阅读提示</h2>
+					<ul class="side-list">
+						<li>这套站点偏向资源站形态，适合发资源整理、教程和经验文章。</li>
+						<li>会员登录使用 Magic Link，用户无需在页面输入密码。</li>
+						<li>如果后续要做真私密资源下载，可以继续接 Supabase Storage 和权限控制。</li>
+					</ul>
+				</aside>
+			</div>
+		</main>
+		<Footer />
+	</body>
+</html>

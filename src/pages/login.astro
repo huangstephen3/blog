@@ -1,0 +1,152 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_DESCRIPTION, SITE_LANG, SITE_TITLE } from '../consts';
+import { withBase } from '../utils/paths';
+---
+
+<!doctype html>
+<html lang={SITE_LANG}>
+	<head>
+		<BaseHead title={`登录 | ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
+		<style>
+			.auth-wrap {
+				display: grid;
+				grid-template-columns: minmax(0, 1fr) 340px;
+				gap: 1rem;
+			}
+
+			.panel {
+				padding: 1.3rem;
+				border-radius: 20px;
+				background: rgb(var(--panel));
+				border: 1px solid rgba(var(--line), 1);
+			}
+
+			form {
+				display: grid;
+				gap: 0.85rem;
+				margin-top: 1rem;
+			}
+
+			label {
+				display: grid;
+				gap: 0.35rem;
+				font-weight: 600;
+			}
+
+			input {
+				padding: 0.85rem 0.95rem;
+				border: 1px solid rgba(var(--line), 1);
+				border-radius: 12px;
+				background: rgb(var(--panel-strong));
+			}
+
+			.status {
+				min-height: 1.5rem;
+				color: rgb(var(--muted));
+			}
+
+			.help-list {
+				margin: 0;
+				padding-left: 1rem;
+			}
+
+			.help-list li + li {
+				margin-top: 0.6rem;
+			}
+
+			@media (max-width: 900px) {
+				.auth-wrap {
+					grid-template-columns: 1fr;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<div class="page-title">
+				<p class="eyebrow">Passwordless Login</p>
+				<h1>登录 / 注册</h1>
+				<p>输入邮箱后，系统会发送 Magic Link 到你的邮箱。点击邮件中的链接即可登录。</p>
+			</div>
+
+			<div class="auth-wrap">
+				<section class="panel" id="login-panel" data-member-redirect={withBase('member/')}>
+					<h2>邮箱登录</h2>
+					<p>这是最适合当前“免费 + 静态托管”方案的登录方式，不要求用户在页面输入密码。</p>
+					<form id="login-form">
+						<label>
+							邮箱地址
+							<input id="email" type="email" placeholder="name@example.com" required />
+						</label>
+						<button class="button" type="submit">发送登录链接</button>
+					</form>
+					<p class="status" id="status"></p>
+				</section>
+
+				<aside class="panel">
+					<h2>接入前要做的配置</h2>
+					<ul class="help-list">
+						<li>在 Supabase 创建项目。</li>
+						<li>把 `PUBLIC_SUPABASE_URL` 和 `PUBLIC_SUPABASE_ANON_KEY` 写入环境变量。</li>
+						<li>在 Supabase Auth 设置中配置 `Site URL` 和允许的 `Redirect URLs`。</li>
+						<li>生产环境建议把登录完成后的跳转地址加入白名单。</li>
+					</ul>
+				</aside>
+			</div>
+		</main>
+		<Footer />
+
+		<script>
+			import { getSupabaseBrowserClient } from '../lib/supabase';
+
+			const panel = document.querySelector<HTMLElement>('#login-panel');
+			const form = document.querySelector<HTMLFormElement>('#login-form');
+			const emailInput = document.querySelector<HTMLInputElement>('#email');
+			const status = document.querySelector<HTMLElement>('#status');
+			const memberRedirect = panel?.dataset.memberRedirect ?? '/member/';
+			const memberUrl = `${window.location.origin}${memberRedirect}`;
+			const client = getSupabaseBrowserClient();
+
+			if (client) {
+				const { data } = await client.auth.getSession();
+				if (data.session) {
+					window.location.href = memberRedirect;
+				}
+			}
+
+			form?.addEventListener('submit', async (event) => {
+				event.preventDefault();
+
+				if (!client) {
+					if (status) status.textContent = '还没配置 Supabase 环境变量，暂时无法发送登录链接。';
+					return;
+				}
+
+				const email = emailInput?.value.trim() ?? '';
+				if (!email) {
+					if (status) status.textContent = '请先输入邮箱。';
+					return;
+				}
+
+				if (status) status.textContent = '正在发送登录链接...';
+
+				const { error } = await client.auth.signInWithOtp({
+					email,
+					options: {
+						emailRedirectTo: memberUrl,
+					},
+				});
+
+				if (status) {
+					status.textContent = error
+						? `发送失败：${error.message}`
+						: '邮件已发送，请去邮箱点击登录链接。';
+				}
+			});
+		</script>
+	</body>
+</html>

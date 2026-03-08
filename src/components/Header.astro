@@ -1,0 +1,134 @@
+---
+import { NAV_LINKS, SITE_TITLE } from '../consts';
+import HeaderLink from './HeaderLink.astro';
+import { withBase } from '../utils/paths';
+---
+
+<header class="site-header">
+	<div class="inner">
+		<div class="brand">
+			<p class="mini">资源网风格</p>
+			<a class="brand-link" href={withBase()}>{SITE_TITLE}</a>
+		</div>
+
+		<nav class="nav-links">
+			{
+				NAV_LINKS.map((link) => (
+					<HeaderLink href={withBase(link.href)}>{link.label}</HeaderLink>
+				))
+			}
+		</nav>
+
+		<div class="auth-actions">
+			<a class="member-link" href={withBase('member/')}>会员中心</a>
+			<a class="login-link" id="auth-link" href={withBase('login/')}>登录</a>
+		</div>
+	</div>
+</header>
+
+<script>
+	import { getSupabaseBrowserClient } from '../lib/supabase';
+
+	const authLink = document.querySelector<HTMLAnchorElement>('#auth-link');
+	const client = getSupabaseBrowserClient();
+
+	if (authLink && client) {
+		const { data } = await client.auth.getSession();
+		if (data.session) {
+			authLink.textContent = '已登录';
+			authLink.setAttribute('href', authLink.getAttribute('href')?.replace('/login/', '/member/') ?? '/');
+		}
+	}
+</script>
+
+<style>
+	.site-header {
+		position: sticky;
+		top: 0;
+		z-index: 20;
+		backdrop-filter: blur(14px);
+		background: rgba(255, 255, 255, 0.92);
+		border-bottom: 1px solid rgba(var(--line), 1);
+	}
+
+	.inner {
+		display: grid;
+		grid-template-columns: auto 1fr auto;
+		align-items: center;
+		gap: 1rem;
+		width: min(1180px, calc(100% - 1.2rem));
+		margin: 0 auto;
+		padding: 0.9rem 0;
+	}
+
+	.brand-link {
+		color: rgb(var(--ink));
+		font-size: 1.15rem;
+		font-weight: 800;
+		text-decoration: none;
+	}
+
+	.mini {
+		margin: 0 0 0.2rem;
+		color: rgb(var(--accent));
+		font-size: 0.74rem;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+	}
+
+	.nav-links {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.4rem;
+		justify-content: center;
+	}
+
+	.nav-links :global(a) {
+		padding: 0.55rem 0.9rem;
+		border-radius: 999px;
+		color: rgb(var(--muted));
+		text-decoration: none;
+	}
+
+	.nav-links :global(a.active),
+	.nav-links :global(a:hover) {
+		color: rgb(var(--accent));
+		background: rgba(var(--accent), 0.08);
+	}
+
+	.auth-actions {
+		display: flex;
+		align-items: center;
+		gap: 0.6rem;
+	}
+
+	.member-link,
+	.login-link {
+		padding: 0.6rem 1rem;
+		border-radius: 999px;
+		text-decoration: none;
+		font-size: 0.95rem;
+	}
+
+	.member-link {
+		color: rgb(var(--ink));
+		background: rgba(var(--panel-strong), 1);
+		border: 1px solid rgba(var(--line), 1);
+	}
+
+	.login-link {
+		color: rgb(var(--panel));
+		background: rgb(var(--accent));
+	}
+
+	@media (max-width: 900px) {
+		.inner {
+			grid-template-columns: 1fr;
+		}
+
+		.nav-links,
+		.auth-actions {
+			justify-content: flex-start;
+		}
+	}
+</style>

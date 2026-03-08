@@ -1,0 +1,113 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_DESCRIPTION, SITE_LANG, SITE_TITLE } from '../consts';
+import { withBase } from '../utils/paths';
+---
+
+<!doctype html>
+<html lang={SITE_LANG}>
+	<head>
+		<BaseHead title={`会员中心 | ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
+		<style>
+			.member-grid {
+				display: grid;
+				grid-template-columns: minmax(0, 1fr) 320px;
+				gap: 1rem;
+			}
+
+			.panel {
+				padding: 1.2rem;
+				border-radius: 20px;
+				background: rgb(var(--panel));
+				border: 1px solid rgba(var(--line), 1);
+			}
+
+			.hidden {
+				display: none;
+			}
+
+			.info {
+				color: rgb(var(--muted));
+			}
+
+			@media (max-width: 900px) {
+				.member-grid {
+					grid-template-columns: 1fr;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<div class="page-title">
+				<p class="eyebrow">Member Center</p>
+				<h1>会员中心</h1>
+				<p>这个页面需要登录后访问。当前展示的是第一版会员中心骨架。</p>
+			</div>
+
+			<div id="member-loading" class="panel" data-login-redirect={withBase('login/')}>正在验证登录状态...</div>
+
+			<div id="member-app" class="member-grid hidden">
+				<section class="panel">
+					<p class="eyebrow">Session</p>
+					<h2>欢迎回来</h2>
+					<p class="info">当前登录邮箱：<strong id="member-email">-</strong></p>
+					<p class="info">这里后续可以接：</p>
+					<ul>
+						<li>会员专属资源列表</li>
+						<li>下载记录和收藏夹</li>
+						<li>投稿入口和账号设置</li>
+					</ul>
+					<p style="margin-top: 1rem;">
+						<button class="button" id="logout-button" type="button">退出登录</button>
+					</p>
+				</section>
+
+				<aside class="panel">
+					<p class="eyebrow">Next Phase</p>
+					<h2>后续最值得加的能力</h2>
+					<ul>
+						<li>登录后拉取私密资源数据</li>
+						<li>受控下载链接</li>
+						<li>按会员等级显示内容</li>
+					</ul>
+				</aside>
+			</div>
+		</main>
+		<Footer />
+
+		<script>
+			import { getSupabaseBrowserClient } from '../lib/supabase';
+
+			const loading = document.querySelector<HTMLElement>('#member-loading');
+			const app = document.querySelector<HTMLElement>('#member-app');
+			const email = document.querySelector<HTMLElement>('#member-email');
+			const logoutButton = document.querySelector<HTMLButtonElement>('#logout-button');
+			const loginUrl = loading?.dataset.loginRedirect ?? '/login/';
+			const client = getSupabaseBrowserClient();
+
+			if (!client) {
+				if (loading) loading.textContent = '还没配置 Supabase 环境变量，会员中心暂时不可用。';
+			} else {
+				const { data } = await client.auth.getSession();
+				const session = data.session;
+
+				if (!session) {
+					window.location.href = loginUrl;
+				} else {
+					if (email) email.textContent = session.user.email ?? '-';
+					loading?.classList.add('hidden');
+					app?.classList.remove('hidden');
+				}
+
+				logoutButton?.addEventListener('click', async () => {
+					await client.auth.signOut();
+					window.location.href = loginUrl;
+				});
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,335 @@
+---
+import { getCollection } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+import Header from '../components/Header.astro';
+import { HOME_FEATURES, MEMBER_BENEFITS, SITE_DESCRIPTION, SITE_LANG, SITE_TAGLINE, SITE_TITLE } from '../consts';
+import { withBase } from '../utils/paths';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+const featured = posts.find((post) => post.data.featured) ?? posts[0];
+const latest = posts.slice(0, 6);
+const categories = Array.from(new Set(posts.map((post) => post.data.category)));
+const hotTags = Array.from(new Set(posts.flatMap((post) => post.data.tags))).slice(0, 8);
+---
+
+<!doctype html>
+<html lang={SITE_LANG}>
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} image={featured?.data.heroImage} />
+		<style>
+			.home-shell {
+				display: grid;
+				grid-template-columns: minmax(0, 1fr) 320px;
+				gap: 1rem;
+			}
+
+			.hero-card,
+			.feed-card,
+			.side-card,
+			.feature-card {
+				background: rgb(var(--panel));
+				border: 1px solid rgba(var(--line), 1);
+				border-radius: 20px;
+			}
+
+			.hero-card {
+				padding: 1.4rem;
+				margin-bottom: 1rem;
+			}
+
+			.hero-grid {
+				display: grid;
+				grid-template-columns: 1.1fr 0.9fr;
+				gap: 1rem;
+			}
+
+			.hero-card h1 {
+				margin: 0.5rem 0 0.8rem;
+				font-size: clamp(2.2rem, 5vw, 4rem);
+				line-height: 1.06;
+			}
+
+			.hero-card p {
+				color: rgb(var(--muted));
+			}
+
+			.hero-actions {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.7rem;
+				margin-top: 1.4rem;
+			}
+
+			.feature-card {
+				overflow: hidden;
+			}
+
+			.feature-card img {
+				display: block;
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				min-height: 280px;
+			}
+
+			.section-head {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				gap: 0.8rem;
+				margin: 0 0 0.9rem;
+			}
+
+			.feed-card {
+				padding: 1rem;
+			}
+
+			.search-box {
+				margin-bottom: 1rem;
+			}
+
+			.search-box input {
+				width: 100%;
+				padding: 0.82rem 0.95rem;
+				border: 1px solid rgba(var(--line), 1);
+				border-radius: 12px;
+				background: rgb(var(--panel-strong));
+			}
+
+			.post-list {
+				display: grid;
+				grid-template-columns: repeat(2, minmax(0, 1fr));
+				gap: 0.9rem;
+			}
+
+			.post-card {
+				display: flex;
+				flex-direction: column;
+				height: 100%;
+				padding: 0.9rem;
+				border-radius: 16px;
+				background: rgb(var(--panel-strong));
+				border: 1px solid rgba(var(--line), 1);
+				text-decoration: none;
+			}
+
+			.post-card img {
+				width: 100%;
+				height: 170px;
+				object-fit: cover;
+				border-radius: 12px;
+				margin-bottom: 0.8rem;
+			}
+
+			.post-card h3 {
+				margin: 0.35rem 0 0.55rem;
+				font-size: 1.18rem;
+				color: rgb(var(--ink));
+			}
+
+			.post-card p {
+				margin: 0;
+				color: rgb(var(--muted));
+				font-size: 0.95rem;
+			}
+
+			.meta-row {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.5rem 0.8rem;
+				color: rgb(var(--muted));
+				font-size: 0.84rem;
+			}
+
+			.tag-row {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.45rem;
+				margin-top: 0.8rem;
+			}
+
+			.tag {
+				padding: 0.22rem 0.62rem;
+				border-radius: 999px;
+				background: rgba(var(--accent), 0.08);
+				color: rgb(var(--accent));
+				font-size: 0.84rem;
+			}
+
+			.side-column {
+				display: grid;
+				gap: 1rem;
+				align-self: start;
+			}
+
+			.side-card {
+				padding: 1rem;
+			}
+
+			.side-card ul {
+				margin: 0;
+				padding-left: 1rem;
+			}
+
+			.side-card li + li {
+				margin-top: 0.55rem;
+			}
+
+			.category-list,
+			.tag-cloud {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.5rem;
+				margin-top: 0.8rem;
+			}
+
+			.category-pill,
+			.tag-cloud a {
+				padding: 0.45rem 0.72rem;
+				border-radius: 999px;
+				background: rgb(var(--panel-strong));
+				border: 1px solid rgba(var(--line), 1);
+				color: rgb(var(--muted));
+				text-decoration: none;
+				font-size: 0.9rem;
+			}
+
+			@media (max-width: 980px) {
+				.home-shell,
+				.hero-grid,
+				.post-list {
+					grid-template-columns: 1fr;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<div class="home-shell">
+				<div>
+					<section class="hero-card">
+						<p class="eyebrow">Free First Blog</p>
+						<div class="hero-grid">
+							<div>
+								<h1>{SITE_TITLE}</h1>
+								<p>{SITE_DESCRIPTION}</p>
+								<p>{SITE_TAGLINE}</p>
+								<div class="hero-actions">
+									<a class="button" href={withBase('blog/')}>浏览资源</a>
+									<a class="button button-soft" href={withBase('vip/')}>查看会员页</a>
+									<a class="button button-soft" href={withBase('login/')}>登录测试</a>
+								</div>
+							</div>
+							<a class="feature-card" href={featured ? withBase(`blog/${featured.id}/`) : withBase('blog/')}>
+								{featured?.data.heroImage && <img src={featured.data.heroImage.src} alt={featured.data.title} />}
+							</a>
+						</div>
+					</section>
+
+					<section class="feed-card">
+						<div class="section-head">
+							<div>
+								<p class="eyebrow">Latest Posts</p>
+								<h2>最新文章</h2>
+							</div>
+							<a href={withBase('blog/')}>查看全部</a>
+						</div>
+
+						<div class="search-box">
+							<input id="post-search" type="search" placeholder="搜索文章标题、分类或标签" />
+						</div>
+
+						<div class="post-list" id="post-list">
+							{
+								latest.map((post) => (
+									<a
+										class="post-card"
+										href={withBase(`blog/${post.id}/`)}
+										data-search={`${post.data.title} ${post.data.category} ${post.data.tags.join(' ')}`}
+									>
+										{post.data.heroImage && <img src={post.data.heroImage.src} alt={post.data.title} />}
+										<div class="meta-row">
+											<span>{post.data.category}</span>
+											<span><FormattedDate date={post.data.pubDate} /></span>
+											{post.data.premium && <span>会员预告</span>}
+										</div>
+										<h3>{post.data.title}</h3>
+										<p>{post.data.description}</p>
+										<div class="tag-row">
+											{post.data.tags.slice(0, 3).map((tag) => <span class="tag">#{tag}</span>)}
+										</div>
+									</a>
+								))
+							}
+						</div>
+					</section>
+				</div>
+
+				<aside class="side-column">
+					<section class="side-card">
+						<p class="eyebrow">登录入口</p>
+						<h3>外网可访问的会员入口</h3>
+						<p>这里已经预留了登录页和会员中心。当前使用 Supabase Magic Link，不要求用户输入密码。</p>
+						<div class="hero-actions">
+							<a class="button" href={withBase('login/')}>立即登录</a>
+						</div>
+					</section>
+
+					<section class="side-card">
+						<p class="eyebrow">Site Shape</p>
+						<h3>这套版型的重点</h3>
+						<ul>
+							{HOME_FEATURES.map((item) => <li><strong>{item.title}</strong>：{item.description}</li>)}
+						</ul>
+					</section>
+
+					<section class="side-card">
+						<p class="eyebrow">会员能力</p>
+						<h3>后续可继续扩展</h3>
+						<ul>
+							{MEMBER_BENEFITS.map((item) => <li>{item}</li>)}
+						</ul>
+					</section>
+
+					<section class="side-card">
+						<p class="eyebrow">分类</p>
+						<h3>栏目导航</h3>
+						<div class="category-list">
+							{categories.map((category) => <span class="category-pill">{category}</span>)}
+						</div>
+					</section>
+
+					<section class="side-card">
+						<p class="eyebrow">热门标签</p>
+						<h3>Tag Cloud</h3>
+						<div class="tag-cloud">
+							{hotTags.map((tag) => <a href={withBase('blog/')}>#{tag}</a>)}
+						</div>
+					</section>
+				</aside>
+			</div>
+		</main>
+		<Footer />
+
+		<script>
+			const input = document.querySelector<HTMLInputElement>('#post-search');
+			const cards = Array.from(document.querySelectorAll<HTMLElement>('#post-list .post-card'));
+
+			if (input) {
+				input.addEventListener('input', () => {
+					const keyword = input.value.trim().toLowerCase();
+
+					cards.forEach((card) => {
+						const haystack = card.dataset.search?.toLowerCase() ?? '';
+						card.style.display = keyword === '' || haystack.includes(keyword) ? '' : 'none';
+					});
+				});
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,74 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_DESCRIPTION, SITE_LANG, SITE_TITLE, STARTER_STEPS } from '../consts';
+---
+
+<!doctype html>
+<html lang={SITE_LANG}>
+	<head>
+		<BaseHead title={`关于本站 | ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
+		<style>
+			.about-grid {
+				display: grid;
+				grid-template-columns: minmax(0, 1fr) 320px;
+				gap: 1rem;
+			}
+
+			.panel {
+				padding: 1.2rem;
+				border-radius: 20px;
+				background: rgb(var(--panel));
+				border: 1px solid rgba(var(--line), 1);
+			}
+
+			.step-list {
+				margin: 0;
+				padding-left: 1.2rem;
+			}
+
+			.step-list li + li {
+				margin-top: 0.7rem;
+			}
+
+			@media (max-width: 900px) {
+				.about-grid {
+					grid-template-columns: 1fr;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<div class="about-grid">
+				<section class="panel">
+					<p class="eyebrow">About This Build</p>
+					<h1>为什么这里不用传统博客后台</h1>
+					<p>
+						你的目标是“尽可能免费”，所以我优先选了静态站点。它的优势是部署简单、速度快、可迁移性好，
+						而且和资源类博客的展示模式非常兼容。
+					</p>
+					<p>
+						现在这个站点已经具备外网访问、自动部署和登录入口。为了避免在 GitHub Pages 上直接处理密码，
+						这里默认走 Supabase 的 Magic Link 邮件登录。
+					</p>
+					<p>
+						如果后续你想进一步做成真正的会员站，我们还可以继续接下载权限、私密资源页、数据库内容管理、
+						评论区和支付系统。
+					</p>
+				</section>
+
+				<aside class="panel">
+					<p class="eyebrow">Quick Setup</p>
+					<h2>你接下来要做的事</h2>
+					<ol class="step-list">
+						{STARTER_STEPS.map((step) => <li>{step}</li>)}
+					</ol>
+				</aside>
+			</div>
+		</main>
+		<Footer />
+	</body>
+</html>
